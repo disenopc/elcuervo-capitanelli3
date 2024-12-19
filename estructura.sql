@@ -62,6 +62,7 @@ capacidad VARCHAR(200),
 responsable VARCHAR(200)
 );
 
+--TABLA PROMOCIONES
 CREATE TABLE promociones (
     id_promocion INT AUTO_INCREMENT PRIMARY KEY,
     nombre_promocion VARCHAR(255) NOT NULL,
@@ -71,6 +72,7 @@ CREATE TABLE promociones (
     porcentaje_descuento DECIMAL(5, 2) NOT NULL
 );
 
+--TABLA METODO DE ENVIO
 CREATE TABLE metodo_de_envio (
     id_envio INT PRIMARY KEY AUTO_INCREMENT,
     nombre_metodo VARCHAR(255) NOT NULL,
@@ -189,6 +191,8 @@ FOREIGN KEY (id_venta) REFERENCES ventas(id_venta),
 FOREIGN KEY (id_producto) REFERENCES productos(id_producto)
 );
 
+
+--TABLA PROGRAMAS DE FIDELIDAD
 CREATE TABLE programas_de_fidelidad (
     id_programa INT AUTO_INCREMENT PRIMARY KEY,
     id_cliente INT NOT NULL,
