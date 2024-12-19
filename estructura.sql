@@ -62,6 +62,23 @@ capacidad VARCHAR(200),
 responsable VARCHAR(200)
 );
 
+CREATE TABLE promociones (
+    id_promocion INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_promocion VARCHAR(255) NOT NULL,
+    descripcion TEXT,
+    fecha_inicio DATETIME NOT NULL,
+    fecha_fin DATETIME NOT NULL,
+    porcentaje_descuento DECIMAL(5, 2) NOT NULL
+);
+
+CREATE TABLE metodo_de_envio (
+    id_envio INT PRIMARY KEY AUTO_INCREMENT,
+    nombre_metodo VARCHAR(255) NOT NULL,
+    costo_envio DECIMAL(10, 2) NOT NULL,
+    tiempo_estimado VARCHAR(100) NOT NULL
+);
+
+
 -- TABLAS CON FK
 
 --TABLA PRODUCTOS
@@ -74,6 +91,17 @@ precio DECIMAL (10,2),
 cantidad INT,
 FOREIGN KEY (id_numero_de_factura_de_compra) REFERENCES facturas_de_compra(id_numero_de_factura_de_compra),
 FOREIGN KEY (id_categoria_de_producto) REFERENCES categoria_de_producto(id_categoria_de_producto)
+);
+
+
+-- TABLA HISTORIAL DE PRECIOS
+CREATE TABLE historial_de_precios (
+    id_historial_precio INT AUTO_INCREMENT PRIMARY KEY,
+    id_producto INT NOT NULL,
+    precio_anterior DECIMAL(10, 2) NOT NULL,
+    precio_nuevo DECIMAL(10, 2) NOT NULL,
+    fecha_cambio DATETIME NOT NULL,
+    FOREIGN KEY (id_producto) REFERENCES productos(id_producto)
 );
 
 --TABLA DETALLE DE COMPRA
@@ -159,4 +187,12 @@ tipo_venta ENUM("ONLINE","FISICA"),
 nombre_cliente VARCHAR(200),
 FOREIGN KEY (id_venta) REFERENCES ventas(id_venta),
 FOREIGN KEY (id_producto) REFERENCES productos(id_producto)
+);
+
+CREATE TABLE programas_de_fidelidad (
+    id_programa INT AUTO_INCREMENT PRIMARY KEY,
+    id_cliente INT NOT NULL,
+    puntos_acumulados INT NOT NULL DEFAULT 0,
+    nivel_fidelidad ENUM ("ALTO","MEDIO","BAJO"),
+    FOREIGN KEY (id_cliente) REFERENCES Clientes(id_cliente)
 );
