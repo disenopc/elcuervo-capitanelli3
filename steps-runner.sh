@@ -22,6 +22,7 @@ docker exec -it -e MYSQL_PWD="coderhouse" mysql-server mysql -u root -e "source 
 # borrar todo y poner de cero
 docker exec -it -e MYSQL_PWD="coderhouse" mysql-server mysql -u root -e "DROP DATABASE IF EXISTS elcuervopetshop;"
 
+# Levantar el proyecto como root
 docker exec -it -e MYSQL_PWD="coderhouse" mysql-server \
 mysql --verbose -u root -e "
     source proyecto_sql/entrega_final/estructura.sql;
@@ -30,6 +31,22 @@ mysql --verbose -u root -e "
     source proyecto_sql/entrega_final/objetos/2-funciones.sql;
     source proyecto_sql/entrega_final/objetos/3-procedimientos.sql;
     source proyecto_sql/entrega_final/objetos/4-triggers.sql;"
+
+
+
+# Levantar todo como usuario non-root
+#Levantar como root
+docker exec -it -e MYSQL_PWD="coderhouse" mysql-server mysql -u root -e "source proyecto_sql/usuario-non-root.sql;"
+
+docker exec -it -e MYSQL_PWD="pass_123!" mysql-server \
+mysql --verbose -u non_root -e --log-bin-trust-function-creators=1 "
+source proyecto_sql/entrega_final/estructura.sql;
+source proyecto_sql/entrega_final/population.sql;
+source proyecto_sql/entrega_final/objetos/1-vistas.sql;
+source proyecto_sql/entrega_final/objetos/2-funciones.sql;
+source proyecto_sql/entrega_final/objetos/3-procedimientos.sql;
+source proyecto_sql/entrega_final/objetos/4-triggers.sql;"
+
 
 
 # Dar de baja la base de datos
