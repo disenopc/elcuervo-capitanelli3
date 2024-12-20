@@ -1,6 +1,6 @@
 USE elcuervopetshop;
 
---___________________________________________________________________________________________________________________________________________________
+-- ___________________________________________________________________________________________________________________________________________________
 -- PRIMER TRIGGER: OBJETIVO - ACTUALIZAR LA CANTIDAD DE VENTAS DE UN VENDEDOR DESPUÉS DE CADA VENTA.
 DELIMITER //
 CREATE TRIGGER actualizar_cantidad_postventa
@@ -13,7 +13,7 @@ BEGIN
 END //
 DELIMITER ;
 
---___________________________________________________________________________________________________________________________________________________
+-- ___________________________________________________________________________________________________________________________________________________
 
 -- SEGUNDO TRIGGER: OBJETIVO - ACTUALIZAR STOCK DE PRODUCTOS DESPÚES DE CADA VENTA 
 DELIMITER //
@@ -33,11 +33,12 @@ BEGIN
 END //
 DELIMITER ;
 
---___________________________________________________________________________________________________________________________________________________
+-- ___________________________________________________________________________________________________________________________________________________
 
 -- TERCER TRIGGER: OBJETIVO - MANEJO DE RECLAMOS Y ACTUALIZACIÓN CONTADOR DE RECLAMOS DEL CLIENTE
 DELIMITER //
-CREATE TRIGGER actualizar_stock_devolución
+
+CREATE TRIGGER actualizar_stock_devolucion
 AFTER INSERT ON postventa
 FOR EACH ROW
 BEGIN
@@ -50,9 +51,13 @@ BEGIN
     WHERE id_venta = NEW.id_venta;
 
     -- Actualizar estado del cliente si tiene muchos reclamos
-    IF (SELECT COUNT(*) FROM postventa 
+    IF (SELECT COUNT(*) 
+        FROM postventa 
         WHERE id_venta IN (SELECT id_venta FROM ventas WHERE id_cliente = v_cliente_id)) > 3 THEN
         UPDATE cliente
         SET estado = 'DEUDOR'
-        END//
-        DELIMITER ;
+        WHERE id_cliente = v_cliente_id;
+    END IF;
+END //
+
+DELIMITER ;

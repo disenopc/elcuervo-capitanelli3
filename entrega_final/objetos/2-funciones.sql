@@ -4,7 +4,7 @@ USE elcuervopetshop;
 
 DELIMITER //
 
-DROP FUNCTION IF EXISTS verificar_disponibilidad_producto $$
+DROP FUNCTION IF EXISTS verificar_disponibilidad_producto //
 
 CREATE FUNCTION verificar_disponibilidad_producto(
     producto_id INT,
@@ -26,7 +26,7 @@ BEGIN
     ELSE
         RETURN CONCAT('Stock insuficiente: Solo hay ', stock_actual, ' unidades disponibles.');
     END IF;
-END$$
+END//
 
 DELIMITER ;
 
@@ -39,13 +39,13 @@ FROM stock
 GROUP BY id_producto
 HAVING COUNT(*) > 1;
 
---________________________________________________________________________________________________________________________________________________________________
+-- ________________________________________________________________________________________________________________________________________________________________
 
 -- SEGUNDA FUNCIÓN: TIEMPO PROMEDIO DE RESOLUCIÓN DE RECLAMOS
 
 DELIMITER //
 
-DROP FUNCTION IF EXISTS tiempo_promedio_resolucion_reclamos $$
+DROP FUNCTION IF EXISTS tiempo_promedio_resolucion_reclamos //
 
 CREATE FUNCTION tiempo_promedio_resolucion_reclamos()
 RETURNS DECIMAL(10, 2)
@@ -59,20 +59,20 @@ BEGIN
     WHERE estado_del_reclamo = 'RESUELTO';
 
     RETURN promedio_resolucion;
-END$$
+END//
 
 DELIMITER ;
 
 -- Llamar a la función para probar
 SELECT tiempo_promedio_resolucion_reclamos();
 
---________________________________________________________________________________________________________________________________________________________________
+-- ________________________________________________________________________________________________________________________________________________________________
 
---TERCERA FUNCIÓN: TASA DE RETENCIÓN DEL CLIENTE
+-- TERCERA FUNCIÓN: TASA DE RETENCIÓN DEL CLIENTE
 
 DELIMITER //
 
-DROP FUNCTION IF EXISTS calcular_tasa_retencion_clientes $$
+DROP FUNCTION IF EXISTS calcular_tasa_retencion_clientes //
 
 CREATE FUNCTION calcular_tasa_retencion_clientes()
 RETURNS DECIMAL(10, 2)
@@ -91,7 +91,7 @@ BEGIN
 
     -- Retorna el porcentaje de clientes activos
     RETURN ROUND((clientes_activos / total_clientes) * 100, 2);
-END$$
+END//
 
 DELIMITER ;
 
@@ -99,14 +99,14 @@ DELIMITER ;
 SELECT calcular_tasa_retencion_clientes();
 
 
---________________________________________________________________________________________________________________________________________________________________
+-- ________________________________________________________________________________________________________________________________________________________________
 
---CUARTA FUNCIÓN: VENDEDOR CON MAYOR CANTIDAD DE VENTAS EJECUTADAS
+-- CUARTA FUNCIÓN: VENDEDOR CON MAYOR CANTIDAD DE VENTAS EJECUTADAS
 
 
 DELIMITER //
 
-DROP FUNCTION IF EXISTS vendedor_top_ventas $$
+DROP FUNCTION IF EXISTS vendedor_top_ventas //
 
 CREATE FUNCTION vendedor_top_ventas()
 RETURNS VARCHAR(200)
@@ -122,7 +122,7 @@ BEGIN
     LIMIT 1;
 
     RETURN nombre_vendedor_top;
-END$$
+END//
 
 DELIMITER ;
 

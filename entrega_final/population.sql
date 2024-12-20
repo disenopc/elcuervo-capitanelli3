@@ -105,33 +105,33 @@ INSERT INTO detalle_de_venta (id_venta, id_producto, id_num_factura_venta, canti
 (5, 5, 5, 2, 26.60, 0.00, 53.20, 'FISICA', 'Daniel Morales');
 
 -- Insertar datos para la tabla promociones
-INSERT INTO promociones (nombre_promocion, descripcion, fecha_inicio, fecha_fin, porcentaje_descuento) VALUES
-('Descuento Verano', 'Promoción especial de verano en todos los productos', '2024-06-01 00:00:00', '2024-08-31 23:59:59', 15.00),
-('Black Friday', 'Descuentos especiales por Black Friday', '2024-11-25 00:00:00', '2024-11-30 23:59:59', 25.00),
-('Cyber Monday', 'Ofertas exclusivas online', '2024-12-01 00:00:00', '2024-12-02 23:59:59', 20.00),
-('Descuento Navideño', 'Promociones especiales para navidad', '2024-12-15 00:00:00', '2024-12-25 23:59:59', 18.50),
-('Promoción Año Nuevo', 'Descuentos de inicio de año', '2025-01-01 00:00:00', '2025-01-15 23:59:59', 22.00);
+INSERT INTO promociones (id_promocion, nombre_promocion, descripcion, fecha_inicio, fecha_fin, porcentaje_descuento) VALUES 
+(1, 'Descuento Verano 2024', 'Grandes descuentos en toda la colección de verano', '2024-06-01 00:00:00', '2024-08-31 23:59:59', 25.00),
+(2, 'Black Friday', 'Descuentos especiales en productos seleccionados', '2024-11-29 00:00:00', '2024-11-29 23:59:59', 40.00),
+(3, 'Semana Santa', 'Aprovecha los descuentos de temporada', '2024-03-24 00:00:00', '2024-03-31 23:59:59', 15.00),
+(4, 'Cyber Monday', 'Ofertas exclusivas en línea', '2024-12-02 00:00:00', '2024-12-02 23:59:59', 30.00),
+(5, 'Aniversario', 'Celebra nuestro aniversario con descuentos especiales', '2024-10-01 00:00:00', '2024-10-15 23:59:59', 20.00);
 
 -- Insertar datos para la tabla metodo_de_envio
-INSERT INTO metodo_de_envio (nombre_metodo, costo_envio, tiempo_estimado) VALUES
-('Envío Estándar', 5.99, '3-5 días hábiles'),
-('Envío Express', 12.99, '24-48 horas'),
-('Envío Internacional', 25.99, '7-10 días hábiles'),
-('Recogida en Tienda', 0.00, '1-2 días hábiles'),
-('Envío Premium', 15.99, 'Mismo día');
+INSERT INTO metodo_de_envio (id_envio, nombre_metodo, costo_envio, tiempo_estimado) VALUES
+(1, 'Envío Estándar', 5.99, '3-5 días hábiles'),
+(2, 'Envío Express', 12.99, '24-48 horas'),
+(3, 'Envío Internacional', 25.99, '7-10 días hábiles'),
+(4, 'Recogida en Tienda', 0.00, '1-2 días hábiles'),
+(5, 'Envío Premium', 15.99, 'Mismo día');
 
 -- Insertar datos para la tabla historial_de_precios
-INSERT INTO historial_de_precios (id_producto, precio_anterior, precio_nuevo, fecha_cambio) VALUES
-(1, 49.99, 45.99, '2024-01-15 10:30:00'),
-(2, 99.99, 89.99, '2024-02-01 14:15:00'),
-(3, 149.99, 129.99, '2024-02-15 09:00:00'),
-(4, 29.99, 24.99, '2024-03-01 11:45:00'),
-(5, 199.99, 179.99, '2024-03-15 16:20:00');
+INSERT INTO historial_de_precios (id_historial_precio,id_producto, precio_anterior, precio_nuevo, fecha_cambio) VALUES
+(1, 1, 49.99, 45.99, '2024-01-15 10:30:00'),
+(2, 2, 99.99, 89.99, '2024-02-01 14:15:00'),
+(3, 3, 149.99, 129.99, '2024-02-15 09:00:00'),
+(4, 4, 29.99, 24.99, '2024-03-01 11:45:00'),
+(5, 5, 199.99, 179.99, '2024-03-15 16:20:00');
 
 -- Insertar datos para la tabla programas_de_fidelidad
-INSERT INTO programas_de_fidelidad (id_cliente, puntos_acumulados, nivel_fidelidad) VALUES
-(1, 1500, 'ALTO'),
-(2, 750, 'MEDIO'),
-(3, 250, 'BAJO'),
-(4, 1800, 'ALTO'),
-(5, 500, 'MEDIO');
+INSERT INTO programas_de_fidelidad (id_programa, id_cliente, puntos_acumulados, nivel_fidelidad) VALUES
+(1, 1, 1500, 'ALTO'),
+(2, 2, 750, 'MEDIO'),
+(3, 3, 250, 'BAJO'),
+(4, 4, 1800, 'ALTO'),
+(5, 5, 500, 'MEDIO');

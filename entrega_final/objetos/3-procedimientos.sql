@@ -28,7 +28,7 @@ BEGIN
     SELECT LAST_INSERT_ID() AS nuevo_producto_id;
 END //
 DELIMITER ;
---______________________________________________________________________________________________________________________________________________________
+-- ______________________________________________________________________________________________________________________________________________________
 
 -- SEGUNDO PROCEDIMIENTO: REGISTRAR UNA NUEVA VENTA
 DELIMITER //
@@ -88,15 +88,16 @@ BEGIN
 END //
 DELIMITER ;
 
---______________________________________________________________________________________________________________________________________________________
+-- ______________________________________________________________________________________________________________________________________________________
 -- TERCER PROCEDIMIENTO: REGISTRAR UN RECLAMO POSTVENTA
 DELIMITER //
+
 DROP PROCEDURE IF EXISTS elcuervopetshop.RegistrarReclamo //
-CREATE PROCEDURE RegistrarReclamo(
+CREATE PROCEDURE elcuervopetshop.RegistrarReclamo(
     IN p_id_venta INT,
     IN p_nombre_cliente VARCHAR(200),
-    IN p_tipo_reclamo ENUM("PRODUCTO DEFECTUOSO","RETRASO EN ENTREGA","ERROR DE FACTURACION","EXPECTATIVA NO SATISFECHA"),
-    IN p_prioridad ENUM("ALTA","MEDIA","BAJA"),
+    IN p_tipo_reclamo ENUM('PRODUCTO DEFECTUOSO', 'RETRASO EN ENTREGA', 'ERROR DE FACTURACION', 'EXPECTATIVA NO SATISFECHA'),
+    IN p_prioridad ENUM('ALTA', 'MEDIA', 'BAJA'),
     IN p_respuesta VARCHAR(200)
 )
 BEGIN
@@ -117,12 +118,14 @@ BEGIN
     );
     SELECT LAST_INSERT_ID() AS nuevo_reclamo_id;
 END //
+
 DELIMITER ;
 
-   -- ACTUALIZA EL STOCK DE PRODUCTO
+-- ACTUALIZA EL STOCK DE PRODUCTO
 DELIMITER //
+
 DROP PROCEDURE IF EXISTS elcuervopetshop.ActualizarStock //
-CREATE PROCEDURE ActualizarStock(
+CREATE PROCEDURE elcuervopetshop.ActualizarStock(
     IN p_id_producto INT,
     IN p_id_centro_almacenamiento INT,
     IN p_cantidad INT
@@ -145,9 +148,11 @@ BEGIN
     SET cantidad = cantidad + p_cantidad 
     WHERE id_producto = p_id_producto;
 END //
+
 DELIMITER ;
 
---_____________________________________________________________________________________________________________________________________________________
+
+-- _____________________________________________________________________________________________________________________________________________________
 
 -- CUARTO PROCEDIMIENTO: OBTENER VENTAS POR VENDEDOR CON FILTROS
 DELIMITER //
