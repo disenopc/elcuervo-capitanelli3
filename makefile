@@ -14,7 +14,7 @@ DATABASE_CREATION=/proyecto_sql/entrega_final/estructura.sql
 DATABASE_POPULATION=/proyecto_sql/entrega_final/population.sql
 CURDATE=$(shell date --iso=seconds)
 
-FILES := $(wildcard ./objects/*.sql)
+FILES := $(wildcard ./proyecto_sql/entrega_final/*.sql)
 
 
 .PHONY: all up objects clean
@@ -59,6 +59,7 @@ access-db:
 
 backup-db:
 	@echo "Back up database by structure and data"
+	@mkdir -p ./$(BACKUP_DIR_FILES)
 	# Dump MySQL database to a file
 	docker exec -it -e MYSQL_PWD=$(PASSWORD) $(SERVICE_NAME) mysqldump -u root $(DATABASE) > ./$(BACKUP_DIR_FILES)/$(DATABASE)-$(CURDATE).sql
 
