@@ -306,7 +306,7 @@ CREATE TABLE `postventa` (
 
 LOCK TABLES `postventa` WRITE;
 /*!40000 ALTER TABLE `postventa` DISABLE KEYS */;
-INSERT INTO `postventa` VALUES (1,1,'Roberto Sanchez','2024-12-21 14:55:48','PRODUCTO DEFECTUOSO','RESUELTO','BAJA',1,'Se realizÃ³ cambio del producto','2024-12-21 14:55:48'),(2,2,'Carolina Lopez','2024-12-21 14:55:48','RETRASO EN ENTREGA','EN PROGRESO','MEDIA',2,'Investigando el motivo del retraso','2024-12-21 14:55:48'),(3,3,'Miguel Torres','2024-12-21 14:55:48','ERROR DE FACTURACION','EN ESPERA','ALTA',3,'Pendiente de revisiÃ³n contable','2024-12-21 14:55:48'),(4,4,'Sofia Ramirez','2024-12-21 14:55:48','EXPECTATIVA NO SATISFECHA','RESUELTO','BAJA',1,'Se ofreciÃ³ explicaciÃ³n y soluciÃ³n','2024-12-21 14:55:48'),(5,5,'Daniel Morales','2024-12-21 14:55:48','PRODUCTO DEFECTUOSO','EN PROGRESO','MEDIA',2,'Evaluando condiciÃ³n del producto','2024-12-21 14:55:48');
+INSERT INTO `postventa` VALUES (1,1,'Roberto Sanchez','2024-12-21 15:32:28','PRODUCTO DEFECTUOSO','RESUELTO','BAJA',1,'Se realizÃ³ cambio del producto','2024-12-21 15:32:28'),(2,2,'Carolina Lopez','2024-12-21 15:32:28','RETRASO EN ENTREGA','EN PROGRESO','MEDIA',2,'Investigando el motivo del retraso','2024-12-21 15:32:28'),(3,3,'Miguel Torres','2024-12-21 15:32:28','ERROR DE FACTURACION','EN ESPERA','ALTA',3,'Pendiente de revisiÃ³n contable','2024-12-21 15:32:28'),(4,4,'Sofia Ramirez','2024-12-21 15:32:28','EXPECTATIVA NO SATISFECHA','RESUELTO','BAJA',1,'Se ofreciÃ³ explicaciÃ³n y soluciÃ³n','2024-12-21 15:32:28'),(5,5,'Daniel Morales','2024-12-21 15:32:28','PRODUCTO DEFECTUOSO','EN PROGRESO','MEDIA',2,'Evaluando condiciÃ³n del producto','2024-12-21 15:32:28');
 /*!40000 ALTER TABLE `postventa` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -537,4 +537,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-21 15:18:21
+-- Dump completed on 2024-12-21 15:33:26
