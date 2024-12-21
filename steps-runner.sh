@@ -1,8 +1,8 @@
+# A continuación expuse el paso a paso en caso de que no se desee utilizar el archivo make.
+# De manera desagregada podrán encontrar la creación del contenedor y la interacción con el mismo.
+
 # para levantar este contenedor con el servidor de mysql:
 docker compose up --build -d
-
-# al estar dentro de una carpeta agregar el nombre de la carpeta si no ejecuta
-docker compose -f "entrega_final/docker-compose.yml" up --build -d
 
 # acceder a ese contenedor para ver que data tiene
 docker exec -it mysql-server bash
@@ -28,7 +28,8 @@ mysql --verbose -u root -e "
     source proyecto_sql/entrega_final/objetos/2-funciones.sql;
     source proyecto_sql/entrega_final/objetos/3-procedimientos.sql;
     source proyecto_sql/entrega_final/objetos/4-triggers.sql;
-    source proyecto_sql/entrega_final/objetos/5-users.sql;"
+    source proyecto_sql/entrega_final/objetos/5-users.sql;
+    source proyecto_sql/entrega_final/objetos/6-procedures.tcl.sql;"
 
 # Levantar todo como usuario non-root
 #Levantar como root
@@ -42,7 +43,10 @@ source proyecto_sql/entrega_final/objetos/1-vistas.sql;
 source proyecto_sql/entrega_final/objetos/2-funciones.sql;
 source proyecto_sql/entrega_final/objetos/3-procedimientos.sql;
 source proyecto_sql/entrega_final/objetos/4-triggers.sql;
-source proyecto_sql/entrega_final/objetos/5-users.sql;"
+source proyecto_sql/entrega_final/objetos/5-users.sql;
+source proyecto_sql/entrega_final/objetos/6-procedures.tcl.sql;"
+
+
 
 # Dar de baja la base de datos
 docker compose down
