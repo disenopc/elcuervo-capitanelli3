@@ -3,8 +3,8 @@ services:
     container_name: mysql-server
     image: mysql:latest
     environment:
-      MYSQL_ROOT_PASSWORD: $ROOT_PASSWORD
-      DATABASE_NAME: $DATABASE_NAME
+      MYSQL_ROOT_PASSWORD: ${ROOT_PASSWORD}
+      DATABASE_NAME: ${DATABASE_NAME}
     volumes:
       - ./:/proyecto_sql
     ports:
