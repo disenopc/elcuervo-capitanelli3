@@ -1,4 +1,4 @@
-![alt text](/Img/brand.png)
+![alt text](./Img/brand.png)
 
 
 # PROYECTO: EL CUERVO PETSHOP
