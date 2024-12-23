@@ -16,6 +16,9 @@ USE elcuervopetshop;
 ### Tabla: `proveedores`
 
 **Propósito:** Registrar información sobre los proveedores.
+Descripción: Almacena datos de los proveedores de productos.
+Relaciones: Referencia productos y categoria_de_producto.
+Problema que Resuelve: Centraliza los datos de proveedores para facilitar las compras y el seguimiento de pedidos.
 
 | Campo                   | Tipo          | Descripción                                           |
 | ----------------------- | ------------- | ------------------------------------------            |
@@ -32,6 +35,9 @@ USE elcuervopetshop;
 ### Tabla: `productos`
 
 **Propósito:** Registrar los productos vendidos.
+Descripción: Contiene información de cada producto, incluyendo su categoría, precio, y cantidad disponible.
+Relaciones: Referencia facturas_de_compra y categoria_de_producto. Referenciado en detalle_de_compra, proveedores, stock, y detalle_de_venta.
+Problema que Resuelve: Facilita el control y la actualización del inventario de productos, junto con la categorización y costos asociados.
 
 | Campo                            | Tipo          | Descripción                           |
 | -------------------------------- | ------------- | ------------------------------------- |
@@ -45,6 +51,9 @@ USE elcuervopetshop;
 ### Tabla: `detalle_de_compra`
 
 **Propósito:** Detallar los productos adquiridos en una compra.
+Descripción: Almacena detalles de cada compra, incluyendo el producto, cantidad y subtotal.
+Relaciones: Referencia productos y facturas_de_compra.
+Problema que Resuelve: Proporciona un desglose detallado de las compras, permitiendo un control detallado de inventario y costos.
 
 | Campo                       | Tipo          | Descripción                             |
 | --------------------------- | ------------- | --------------------------------------- |
@@ -58,6 +67,9 @@ USE elcuervopetshop;
 ### Tabla: `historial_de_precios`
 
 **Propósito:** Registrar cambios en los precios de los productos.
+Descripción: Almacena detalles de los precios a lo largo del tiempo.
+Relaciones: Referenciada a la tabla de productos.
+Problema que resuelve: Permite la trazabilidad del historial de precios en el periodo analizado.
 
 | Campo              | Tipo          | Descripción                             |
 | ------------------ | ------------- | --------------------------------------- |
@@ -72,6 +84,9 @@ USE elcuervopetshop;
 ### Tabla: `facturas_de_compra`
 
 **Propósito:** Registrar las facturas de compra realizadas a proveedores.
+Descripción: Almacena detalles de las facturas de compra, incluyendo el proveedor, fecha de compra, monto bruto, impuestos y monto neto.
+Relaciones: Referenciada en la tabla productos y detalle_de_compra.
+Problema que Resuelve: Facilita el control y la auditoría de las compras realizadas, manteniendo un registro detallado de cada factura para gestionar costos y stock.
 
 | Campo                            | Tipo          | Descripción                        |
 | -------------------------------- | ------------- | ---------------------------------- |
@@ -87,6 +102,9 @@ USE elcuervopetshop;
 ### Tabla: `categoria_de_producto`
 
 **Propósito:** Clasificar los productos en diferentes categorías.
+Descripción: Define las categorías de productos disponibles en la tienda.
+Relaciones: Referenciado en productos, ventas, y proveedores.
+Problema que Resuelve: Organiza los productos en categorías, facilitando la gestión del inventario y el análisis de ventas por categoría de producto.
 
 | Campo                      | Tipo    | Descripción                          |
 | -------------------------- | ------- | ------------------------------------ |
@@ -97,6 +115,9 @@ USE elcuervopetshop;
 ### Tabla: `centro_de_almacenamiento`
 
 **Propósito:** Registrar los centros de almacenamiento.
+Descripción: Almacena información sobre los centros de almacenamiento.
+Relaciones: Referenciado en la tabla stock.
+Problema que Resuelve: Permite gestionar el inventario en diferentes ubicaciones de almacenamiento, optimizando la logística de stock.
 
 | Campo                         | Tipo         | Descripción                      |
 | ----------------------------- | ------------ | -------------------------------- |
@@ -110,6 +131,9 @@ USE elcuervopetshop;
 ### Tabla: `stock`
 
 **Propósito:** Gestionar la existencia de productos en los almacenes.
+Descripción: Almacena información sobre la cantidad de productos disponibles en cada centro de almacenamiento.
+Relaciones: Referencia productos y centro_de_almacenamiento.
+Problema que Resuelve: Facilita la administración de los niveles de stock y permite rastrear la ubicación de productos en los distintos centros de almacenamiento.
 
 | Campo                      | Tipo          | Descripción                             |
 | ---------------------------| ------------- | --------------------------------------- |
@@ -122,6 +146,9 @@ USE elcuervopetshop;
 ### Tabla: `ventas`
 
 **Propósito:** Registrar las ventas realizadas.
+Descripción: Registra cada venta realizada, incluyendo el cliente, vendedor, producto y el monto total.
+Relaciones: Referencia cliente, vendedor, categoria_de_producto, y facturas_de_venta.
+Problema que Resuelve: Permite llevar un control detallado de las ventas, identificando el cliente y el vendedor asociados, así como la categoría del producto.
 
 | Campo                   | Tipo          | Descripción                              |
 | ----------------------- | ------------- | ---------------------------------------- |
@@ -139,6 +166,9 @@ USE elcuervopetshop;
 ### Tabla: `vendedor`
 
 **Propósito:** Gestionar la información de los vendedores.
+Descripción: Almacena la información sobre los vendedores, incluyendo nombre, estado y cantidad de ventas.
+Relaciones: Referenciado en la tabla ventas.
+Problema que Resuelve: Ayuda a gestionar y evaluar el desempeño de cada vendedor individualmente y permite segmentar las ventas realizadas por cada uno.
 
 | Campo                | Tipo         | Descripción                                 |
 | -------------------- | ------------ | ------------------------------------------- |
@@ -150,6 +180,9 @@ USE elcuervopetshop;
 ### Tabla: `cliente`
 
 **Propósito:** Registrar los clientes de la tienda.
+Descripción: Almacena los datos de los clientes, como nombre, fecha de nacimiento, dirección, email, estado del cliente, etc.
+Relaciones: Referenciado en la tabla ventas.
+Problema que Resuelve: Permite mantener un historial y una clasificación de los clientes basada en su estado, facilitando el seguimiento y la fidelización de clientes.
 
 | Campo                 | Tipo         | Descripción                                |
 | --------------------- | ------------ | ------------------------------------------ |
@@ -164,6 +197,9 @@ USE elcuervopetshop;
 ### Tabla: `facturas_de_venta`
 
 **Propósito:** Registrar las facturas de venta emitidas.
+Descripción: Almacena las facturas de venta generadas para cada transacción.
+Relaciones: Referenciado en la tabla ventas.
+Problema que Resuelve: Facilita el registro y la verificación de ventas realizadas, proporcionando un control administrativo.
 
 | Campo                  | Tipo          | Descripción                        |
 | ---------------------- | ------------- | ---------------------------------- |
@@ -210,6 +246,9 @@ USE elcuervopetshop;
 ### Tabla: `detalle_de_venta`
 
 **Propósito:** Detallar los productos vendidos en cada venta.
+Descripción: Almacena detalles de los productos vendidos en cada transacción.
+Relaciones: Referencia ventas, productos, y facturas_de_venta.
+Problema que Resuelve: Ofrece un desglose detallado de cada venta, permitiendo analizar las ventas por producto y tipo de venta (online o física).
 
 | Campo                   | Tipo          | Descripción                              |
 | ----------------------- | ------------- | ---------------------------------------- |
@@ -227,6 +266,9 @@ USE elcuervopetshop;
 ### Tabla: `postventa`
 
 **Propósito:** Gestionar los reclamos realizados por los clientes.
+Descripción: Almacena información sobre reclamos de postventa.
+Relaciones: Referencia ventas.
+Problema que Resuelve: Facilita el seguimiento y la gestión de los reclamos para mejorar el servicio postventa.
 
 | Campo                | Tipo          | Descripción                                            |
 | -------------------- | ------------- | ------------------------------------------             |
