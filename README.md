@@ -528,18 +528,6 @@ Evalúa la rotación de los productos en el inventario comparando las unidades v
 ---
 
 ## **PROCEDIMIENTOS**
-Aquí tienes el formato en **README**:
-
----
-
-# Procedimientos Almacenados - El Cuervo Pet Shop
-
-## Descripción General
-Este documento describe los procedimientos almacenados implementados para gestionar diversas operaciones en el sistema de base de datos de **El Cuervo Pet Shop**, como el registro de productos, ventas, reclamos, y actualización de stock. Además, incluye un procedimiento para filtrar detalles de ventas.
-
----
-
-## Procedimientos
 
 ## 1. **Procedimiento: Insertar un nuevo producto**
 - **Descripción**: Permite registrar un nuevo producto en la base de datos.
