@@ -8,9 +8,9 @@ Tutor: Hugo González
 
 
 
-CONTENIDOS DE LA ENTREGA FINAL
-# Documentación del modelo - El Cuervo PetShop
-# Presentación en Canva
+# CONTENIDOS DE LA ENTREGA FINAL
+## Documentación del modelo - El Cuervo PetShop
+## Presentación en Canva
 ## Creación de la Base de Datos
 ## Características Principales
 ## Uso
