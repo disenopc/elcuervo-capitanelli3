@@ -13,6 +13,53 @@ CREATE DATABASE elcuervopetshop;
 USE elcuervopetshop;
 ```
 
+### Características Principales
+
+    Gestión de Ventas
+Permite consultar y analizar las ventas realizadas con diversos filtros, como el tipo de venta (online o presencial) y rangos de cantidades vendidas.  
+
+    Administración de Vendedores
+Soporte para analizar el estado de los vendedores (activos o inactivos), su desempeño y la cantidad de ventas que han realizado.  
+
+    Control de Productos y Clientes
+Incluye herramientas para organizar y consultar información sobre productos y clientes asociados a las ventas.  
+
+    Filtros Personalizable
+Los procedimientos almacenados permiten realizar consultas específicas según los criterios seleccionados, como tipo de venta, estado del vendedor o rangos de cantidades.  
+
+    Integración con MySQL
+Diseñado para aprovechar las capacidades de los procedimientos almacenados, optimizando el acceso a la información y reduciendo la carga en las aplicaciones externas.
+
+
+### Uso
+
+    Consultas con Filtros
+El sistema permite realizar consultas avanzadas a través de procedimientos almacenados que admiten filtros como:  
+- Tipo de Venta**: Diferenciando entre ventas presenciales y ventas online.  
+- Estado del Vendedor**: Para identificar si los vendedores están activos o inactivos.  
+- Rangos de Cantidad Vendida**: Permite limitar las consultas a intervalos específicos de cantidades.  
+
+    Análisis de Desempeño
+El sistema proporciona herramientas para analizar datos clave sobre los vendedores y su desempeño, incluyendo la cantidad total de ventas realizadas.
+
+    Control de Productos y Clientes
+Organiza y consulta datos relevantes sobre los productos vendidos y los clientes asociados, proporcionando una visión integral de las operaciones.
+
+
+### DER - Herramienta utilizada: Excalidraw
+
+![alt text](image.png)
+
+
+
+### Estructura del Proyecto
+
+El proyecto está organizado de la siguiente manera:  
+
+- Base de Datos: Contiene los scripts necesarios para la creación y configuración de la base de datos, así como los procedimientos almacenados.  
+- Documentación: Incluye el presente archivo README y otros recursos útiles, como diagramas de la base de datos (si están disponibles).  
+- Scripts de Prueba: Contiene consultas de ejemplo para probar los procedimientos almacenados y verificar su funcionamiento.
+
 
 ### Tabla: `proveedores`
 
@@ -287,3 +334,14 @@ Problema que Resuelve: Facilita el seguimiento y la gestión de los reclamos par
 
 
 
+### Como levantar el proyecto en CodeSpaces GitHub
+            env: Archivo con contraseñas y data secretas
+            Makefile: Abstracción de creacción del proyecto
+            docker-compose.yml: Permite generar las bases de datos en forma de contenedores
+### Pasos para arrancar el proyecto
+            En la terminal de linux escribir :
+            make si te da un error de que no conexion al socket, volver al correr el comando make
+            make clean-db limpiar la base de datos
+            make test-db para mirar los datos de cada tabla
+            make backup-db para realizar un backup de mi base de datos
+            make access-db para acceder a la base de datos
