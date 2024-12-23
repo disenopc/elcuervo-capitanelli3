@@ -33,9 +33,9 @@
       - **4. triggers.sql**  
       - **5. users.sql**  
       - **6. procedures.tcl**  
-    **c. estructura**  
-    **d. population**  
-    **e. non-root**
+   **c. estructura**  
+   **d. population**  
+   **e. non-root**
 2. **.env: archivo con contraseña y data secreta**  
 3. **Makefile: Abstracción de creacción del proyecto**  
 4. **docker-compose.yml: Permite generar las bases de datos en forma de contenedores**  
