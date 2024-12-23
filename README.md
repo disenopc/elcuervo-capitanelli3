@@ -9,14 +9,14 @@
 
 
 # CONTENIDOS DE LA ENTREGA FINAL
-## Documentación del modelo - El Cuervo PetShop
-## Presentación en Canva
-## Creación de la Base de Datos
-## Características Principales
-## Uso
-## DER - Herramienta utilizada: Excalidraw
-## Estructura del Proyecto
-# Presentación en Canva
+* Documentación del modelo - El Cuervo PetShop
+* Presentación en Canva
+* Creación de la Base de Datos
+* Características Principales
+* Uso
+* DER - Herramienta utilizada: Excalidraw
+* Estructura del Proyecto
+* Presentación en Canva
 
 
 
