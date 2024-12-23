@@ -90,7 +90,7 @@ El proyecto está organizado de la siguiente manera:
 - Documentación: Incluye el presente archivo README y otros recursos útiles, como diagramas de la base de datos (si están disponibles).  
 - Scripts de Prueba: Contiene consultas de ejemplo para probar los procedimientos almacenados y verificar su funcionamiento.
 
-
+## **TABLAS**
 ### Tabla: `proveedores`
 
 **Propósito:** Registrar información sobre los proveedores.
@@ -362,6 +362,229 @@ Problema que Resuelve: Facilita el seguimiento y la gestión de los reclamos par
 | `fecha_de_resolucion` | DATETIME     | Fecha en que se resolvió el reclamo.                   |
 
 
+## **VISTAS**
+
+## 1. **Vista: Total de Ingresos por Categoría**
+
+### Propósito
+Esta vista muestra los ingresos totales generados por cada categoría de producto, el número de ventas y el valor promedio de las transacciones.
+
+### Tablas Relacionadas
+- **ventas**: Proporciona la información sobre las transacciones realizadas.
+- **categoria_de_producto**: Contiene las categorías de productos y sus descripciones.
+
+### Atributos Generados
+- `categoria_de_producto`: Nombre de la categoría.
+- `total_ingresos`: Suma total de las ventas por categoría.
+- `num_ventas`: Cantidad total de ventas por categoría.
+- `promedio_transaccion_valor`: Valor promedio de las transacciones.
+
+### Relación
+- **ventas** (N) → **categoria_de_producto** (1) mediante `id_categoria_de_producto`.
+
+---
+
+## 2. **Vista: Crecimiento de Ventas Mensuales**
+
+### Propósito
+Analiza el crecimiento mensual de las ventas, calculando el incremento porcentual entre meses consecutivos.
+
+### Tablas Relacionadas
+- **ventas**: Registra el total de ventas y las fechas correspondientes.
+- **cliente**: Relaciona a las ventas con los clientes.
+
+### Atributos Generados
+- `year`: Año de la venta.
+- `month`: Mes de la venta.
+- `total_mensual_ventas`: Total de ventas mensuales.
+- `previa_mensuales_ventas`: Total de ventas del mes anterior.
+- `crecimiento_porcentual`: Porcentaje de crecimiento comparado con el mes previo.
+
+### Relación
+- **ventas** (N) → **cliente** (1) mediante `id_cliente`.
+
+---
+
+## 3. **Vista: Análisis de Retención de Clientes**
+
+### Propósito
+Calcula la tasa de retención de clientes según su actividad y estado.
+
+### Tablas Relacionadas
+- **cliente**: Registra los clientes y su estado.
+- **ventas**: Identifica las transacciones realizadas por cada cliente.
+
+### Atributos Generados
+- `estado_cliente`: Estado actual del cliente.
+- `total_clientes`: Cantidad total de clientes.
+- `clientes_activos`: Clientes que han realizado al menos una compra.
+- `tasa_retencion`: Porcentaje de clientes activos sobre el total.
+
+### Relación
+- **cliente** (1) ← **ventas** (N) mediante `id_cliente` (LEFT JOIN).
+
+---
+
+## 4. **Vista: Desempeño del Vendedor**
+
+### Propósito
+Analiza el desempeño de los vendedores basándose en el total de ventas realizadas y sus valores promedio.
+
+### Tablas Relacionadas
+- **vendedor**: Registra los datos y el estado de los vendedores.
+- **ventas**: Relaciona las transacciones con los vendedores responsables.
+
+### Atributos Generados
+- `nombre_vendedor`: Nombre del vendedor.
+- `estado_vendedor`: Estado actual del vendedor.
+- `cantidad_de_ventas`: Cantidad total de ventas realizadas.
+- `total_ventas`: Suma total de las ventas realizadas.
+- `promedio_valor_ventas`: Promedio de valor por transacción.
+- `num_ventas`: Total de transacciones únicas.
+
+### Relación
+- **ventas** (N) → **vendedor** (1) mediante `id_vendedor`.
+
+---
+
+## 5. **Vista: Análisis de Quejas**
+
+### Propósito
+Proporciona un resumen del tipo y estado de los reclamos realizados, su porcentaje y el tiempo promedio de resolución.
+
+### Tablas Relacionadas
+- **postventa**: Registra los reclamos de los clientes, sus estados y fechas.
+
+### Atributos Generados
+- `tipo_de_reclamo`: Clasificación del reclamo.
+- `estado_del_reclamo`: Estado actual del reclamo.
+- `total_reclamos`: Cantidad total de reclamos registrados.
+- `porcentajes_reclamos`: Porcentaje del total de reclamos por tipo.
+- `promedio_resolucion_tiempo`: Días promedio para resolver los reclamos.
+
+### Relación
+- **postventa** (N) → **ventas** (1) mediante `id_venta`.
+
+---
+
+## 6. **Vista: Rotación de Inventarios**
+
+### Propósito
+Evalúa la rotación de los productos en el inventario comparando las unidades vendidas con el stock actual.
+
+### Tablas Relacionadas
+- **productos**: Proporciona información de los productos.
+- **stock**: Contiene datos del inventario actual.
+- **categoria_de_producto**: Clasifica los productos en categorías.
+- **detalle_de_venta**: Relaciona las ventas con los productos.
+
+### Atributos Generados
+- `nombre_producto`: Nombre del producto.
+- `categoria_de_producto`: Categoría del producto.
+- `stock_actual`: Cantidad de unidades disponibles en inventario.
+- `total_unidades_vendidas`: Cantidad total de unidades vendidas.
+- `tasa_rotacion`: Relación entre unidades vendidas y el stock actual.
+
+### Relación
+- **productos** (1) → **stock** (1) mediante `id_producto`.
+- **productos** (1) → **categoria_de_producto** (1) mediante `id_categoria_de_producto`.
+- **productos** (1) → **detalle_de_venta** (N) mediante `id_producto`.
+
+
+
+## **FUNCIONES**
+
+#### **PRIMERA FUNCIÓN: Verificar Disponibilidad de un Producto**
+- **Descripción**: La función `verificar_disponibilidad_producto` se utiliza para comprobar si un producto tiene suficiente stock disponible para satisfacer una cantidad deseada.
+- **Relación en el DER**:
+  - Tabla **stock**: La función consulta el atributo `cantidad_stock` usando `id_producto` como clave de búsqueda.
+- **Resultado**: Devuelve un mensaje indicando si el stock es suficiente o insuficiente, junto con el stock disponible.
+
+---
+
+#### **SEGUNDA FUNCIÓN: Tiempo Promedio de Resolución de Reclamos**
+- **Descripción**: La función `tiempo_promedio_resolucion_reclamos` calcula el tiempo promedio (en días) que tarda en resolverse un reclamo marcado como "RESUELTO".
+- **Relación en el DER**:
+  - Tabla **postventa**: Utiliza los atributos `fecha_de_resolucion`, `fecha_reclamo` y `estado_del_reclamo` para calcular la diferencia de días.
+- **Resultado**: Devuelve un número decimal representando el tiempo promedio de resolución en días.
+
+---
+
+#### **TERCERA FUNCIÓN: Tasa de Retención del Cliente**
+- **Descripción**: La función `calcular_tasa_retencion_clientes` calcula el porcentaje de clientes activos (con al menos una venta) en relación con el total de clientes registrados.
+- **Relación en el DER**:
+  - Tabla **cliente**: Se consulta el número total de clientes (`id_cliente`).
+  - Tabla **ventas**: Se determina el número de clientes activos a partir de las ventas asociadas.
+- **Resultado**: Devuelve un valor decimal indicando el porcentaje de retención de clientes.
+
+---
+
+#### **CUARTA FUNCIÓN: Vendedor con Mayor Cantidad de Ventas**
+- **Descripción**: La función `vendedor_top_ventas` obtiene el nombre del vendedor con la mayor cantidad de ventas ejecutadas.
+- **Relación en el DER**:
+  - Tabla **vendedor**: Se consulta el atributo `cantidad_de_ventas` y se ordenan los registros para obtener al vendedor con más ventas.
+- **Resultado**: Devuelve el nombre del vendedor con el mayor número de ventas.
+
+---
+
+## **PROCEDIMIENTOS**
+1. InsertarProducto
+Descripción: Permite registrar un nuevo producto en la base de datos.
+Parámetros de entrada:
+p_id_factura_compra: Identificador de la factura de compra asociada.
+p_id_categoria: Identificador de la categoría del producto.
+p_nombre_producto: Nombre del producto.
+p_precio: Precio del producto.
+p_cantidad: Cantidad inicial de stock del producto.
+Relaciones:
+Inserta datos en la tabla productos.
+Se relaciona con facturas_de_compra y categoria_de_producto mediante claves foráneas.
+2. RegistrarVenta
+Descripción: Registra una nueva venta y genera la factura correspondiente.
+Parámetros de entrada:
+p_id_cliente: Identificador del cliente.
+p_id_vendedor: Identificador del vendedor.
+p_id_categoria: Identificador de la categoría del producto.
+p_nombre_cliente: Nombre del cliente.
+p_precio_venta: Precio unitario del producto vendido.
+p_cantidad: Cantidad vendida.
+Relaciones:
+Inserta datos en las tablas facturas_de_venta y ventas.
+Relaciona ventas con cliente, vendedor y categoria_de_producto mediante claves foráneas.
+3. RegistrarReclamo
+Descripción: Registra un nuevo reclamo en el sistema postventa.
+Parámetros de entrada:
+p_id_venta: Identificador de la venta asociada al reclamo.
+p_nombre_cliente: Nombre del cliente.
+p_tipo_reclamo: Tipo de reclamo (enum: PRODUCTO DEFECTUOSO, RETRASO EN ENTREGA, etc.).
+p_prioridad: Prioridad del reclamo (enum: ALTA, MEDIA, BAJA).
+p_respuesta: Respuesta inicial al reclamo.
+Relaciones:
+Inserta datos en la tabla postventa.
+Relaciona postventa con ventas.
+4. ActualizarStock
+Descripción: Actualiza el stock de un producto en el almacén correspondiente.
+Parámetros de entrada:
+p_id_producto: Identificador del producto.
+p_id_centro_almacenamiento: Identificador del centro de almacenamiento.
+p_cantidad: Cantidad a añadir al stock.
+Relaciones:
+Actualiza o inserta datos en la tabla stock.
+Sincroniza el stock de la tabla productos.
+5. ObtenerDetallesVentaConVendedoresFiltrados
+Descripción: Recupera detalles de ventas con filtros avanzados sobre el tipo de venta, estado del vendedor y rangos de cantidad.
+Parámetros de entrada:
+p_tipo_venta: Tipo de venta a filtrar (opcional).
+p_estado_vendedor: Estado del vendedor a filtrar (opcional).
+p_min_cantidad: Cantidad mínima de productos vendidos (por defecto: 0).
+p_max_cantidad: Cantidad máxima de productos vendidos (por defecto: 1,000,000).
+Relaciones:
+Consulta las tablas detalle_de_venta, ventas, y vendedor.
+Permite análisis con múltiples criterios.
+
+## **TRIGGERS**
+
+## **USUARIOS**
 
 
 ### Como levantar el proyecto en CodeSpaces GitHub

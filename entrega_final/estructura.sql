@@ -168,7 +168,7 @@ FOREIGN KEY (id_promocion) REFERENCES promociones(id_promocion),
 FOREIGN KEY (id_envio) REFERENCES metodo_de_envio(id_envio)
 );
 
--- TABLA RECLAMOS
+-- TABLA POSTVENTA o RECLAMOS
 CREATE TABLE postventa(
 id_reclamo INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 id_venta INT,
