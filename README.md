@@ -722,7 +722,7 @@ Evalúa la rotación de los productos en el inventario comparando las unidades v
 - **Seguridad**: Las contraseñas en este ejemplo son básicas y deben actualizarse según las políticas de seguridad de la organización.
 - **Mantenimiento**: Se recomienda auditar periódicamente los privilegios de los usuarios para garantizar que se alineen con las necesidades actuales del negocio y las mejores prácticas de seguridad.
 
-# Documentación para Usuario "non_root" en El Cuervo Pet Shop
+## Documentación para Usuario "non_root"
 
 Este documento describe la configuración del usuario **`non_root`**, creado con permisos avanzados pero sin ser directamente el usuario `root`. Este usuario tiene privilegios completos en la base de datos **`elcuervopetshop`** y puede otorgar permisos a otros usuarios, pero opera dentro de un entorno más seguro y controlado.
 
