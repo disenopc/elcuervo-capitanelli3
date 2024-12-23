@@ -26,7 +26,8 @@
 
 1. **FOLDER: Entrega Final**
     **a.backup: por medio de archivo make**
-    **b.objetos: 1-vistas.sql**
+    **b.objetos:**
+           - **   1-vistas.sql**
            - **   2-funciones.sql**
            - **   3-procedimientos.sql**
            - **   4-triggers.sql**
