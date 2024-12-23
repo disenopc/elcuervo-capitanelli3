@@ -12,17 +12,17 @@ CONTENIDOS DE LA ENTREGA FINAL
 
 
 
-# ** Documentación del modelo - El Cuervo PetShop **
+# **Documentación del modelo - El Cuervo PetShop**
 
 Este proyecto está diseñado para gestionar las operaciones de ventas, compras y postventa de El Cuervo PetShop. El modelo permite almacenar y organizar información de clientes, proveedores, vendedores, productos, y reclamos postventa. Su estructura facilita la administración del inventario, la auditoría de transacciones, y el seguimiento de interacciones con clientes.
 
 
 ---
 
-# Presentación en Canva
+# **Presentación en Canva**
 LINK: https://www.canva.com/design/DAGU3XvVhrI/LJ90pXHF-jiMnAlSKxnazw/edit?utm_content=DAGU3XvVhrI&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
 
-## Creación de la Base de Datos
+## **Creación de la Base de Datos**
 
 ```sql
 DROP DATABASE IF EXISTS elcuervopetshop;
@@ -30,7 +30,7 @@ CREATE DATABASE elcuervopetshop;
 USE elcuervopetshop;
 ```
 
-## Características Principales
+## **Características Principales**
 
     Gestión de Ventas
 Permite consultar y analizar las ventas realizadas con diversos filtros, como el tipo de venta (online o presencial) y rangos de cantidades vendidas.  
@@ -48,7 +48,7 @@ Los procedimientos almacenados permiten realizar consultas específicas según l
 Diseñado para aprovechar las capacidades de los procedimientos almacenados, optimizando el acceso a la información y reduciendo la carga en las aplicaciones externas.
 
 
-## Uso
+## **Uso**
 
     Consultas con Filtros
 El sistema permite realizar consultas avanzadas a través de procedimientos almacenados que admiten filtros como:  
@@ -63,12 +63,12 @@ El sistema proporciona herramientas para analizar datos clave sobre los vendedor
 Organiza y consulta datos relevantes sobre los productos vendidos y los clientes asociados, proporcionando una visión integral de las operaciones.
 
 
-## DER - Herramienta utilizada: Excalidraw
+## **DER - Herramienta utilizada: Excalidraw**
 ![alt text](image-1.png)
 
 
 
-## Estructura del Proyecto
+## **Estructura del Proyecto**
 
 El proyecto está organizado de la siguiente manera:  
 
