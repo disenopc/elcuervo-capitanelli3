@@ -1,0 +1,246 @@
+# Documentación de la Base de Datos - El Cuervo Pet Shop
+
+Este documento describe la estructura y funcionalidad de la base de datos utilizada para gestionar los procesos del negocio "El Cuervo Pet Shop". A continuación, se detallan las tablas, campos, relaciones y especificaciones clave.
+
+---
+
+## Creación de la Base de Datos
+
+```sql
+DROP DATABASE IF EXISTS elcuervopetshop;
+CREATE DATABASE elcuervopetshop;
+USE elcuervopetshop;
+```
+
+
+### Tabla: `proveedores`
+
+**Propósito:** Registrar información sobre los proveedores.
+
+| Campo                   | Tipo          | Descripción                                |
+| ----------------------- | ------------- | ------------------------------------------ |
+| `id_proveedor`          | INT, PK       | Identificador único del proveedor.         |
+| `id_producto`           | INT, FK       | Producto suministrado por el proveedor.    |
+| `id_categoria_de_producto` | INT, FK    | Categoría del producto.                    |
+| `fecha`                 | DATETIME      | Fecha del registro o última actualización. |
+| `numero_de_pedido`      | INT           | Número de pedido asociado.                 |
+| `detalles`              | VARCHAR(200)  | Detalles del pedido o relación.            |
+| `forma_de_pago`         | ENUM          | Forma de pago pactada ("CONTADO", "A 30 DÍAS", etc.). |
+| `estado_del_pago`       | ENUM          | Estado del pago ("PAGADO", "PENDIENTE"). |
+
+
+### Tabla: `productos`
+
+**Propósito:** Registrar los productos vendidos.
+
+| Campo                            | Tipo          | Descripción                           |
+| -------------------------------- | ------------- | ------------------------------------- |
+| `id_producto`                    | INT, PK       | Identificador único del producto.     |
+| `id_numero_de_factura_de_compra` | INT, FK       | Referencia a `facturas_de_compra`.    |
+| `id_categoria_de_producto`       | INT, FK       | Referencia a `categoria_de_producto`. |
+| `nombre_producto`                | VARCHAR(200)  | Nombre del producto.                  |
+| `precio`                         | DECIMAL(10,2) | Precio del producto.                  |
+| `cantidad`                       | INT           | Cantidad disponible.    
+
+### Tabla: `detalle_de_compra`
+
+**Propósito:** Detallar los productos adquiridos en una compra.
+
+| Campo                       | Tipo          | Descripción                             |
+| --------------------------- | ------------- | --------------------------------------- |
+| `id_detalle_compra`         | INT, PK       | Identificador único del detalle.        |
+| `id_numero_de_factura_de_compra` | INT, FK  | Referencia a `facturas_de_compra`.      |
+| `id_producto`               | INT, FK       | Referencia al producto comprado.        |
+| `cantidad`                  | INT           | Cantidad de producto comprado.          |
+| `precio`                    | DECIMAL(10,2) | Precio unitario del producto.           |
+| `subtotal`                  | DECIMAL(10,2) | Total por cantidad (cantidad * precio). |
+
+### Tabla: `historial_de_precios`
+
+**Propósito:** Registrar cambios en los precios de los productos.
+
+| Campo              | Tipo          | Descripción                             |
+| ------------------ | ------------- | --------------------------------------- |
+| `id_historial_precio` | INT, PK    | Identificador único del registro.       |
+| `id_producto`        | INT, FK     | Referencia al producto.                 |
+| `precio_anterior`    | DECIMAL(10,2) | Precio anterior del producto.          |
+| `precio_nuevo`       | DECIMAL(10,2) | Nuevo precio del producto.             |
+| `fecha_cambio`       | DATETIME    | Fecha en que se realizó el cambio.      |
+
+
+
+### Tabla: `facturas_de_compra`
+
+**Propósito:** Registrar las facturas de compra realizadas a proveedores.
+
+| Campo                            | Tipo          | Descripción                        |
+| -------------------------------- | ------------- | ---------------------------------- |
+| `id_numero_de_factura_de_compra` | INT, PK       | Identificador único de la factura. |
+| `nombre_proveedor`               | VARCHAR(200)  | Nombre del proveedor.              |
+| `fecha_compra`                   | DATETIME      | Fecha de la compra.                |
+| `detalle`                        | VARCHAR(200)  | Detalle de la compra.              |
+| `monto_bruto`                    | DECIMAL(10,2) | Monto bruto de la factura.         |
+| `impuestos`                      | DECIMAL(10,2) | Impuestos aplicados.               |
+| `monto_neto`                     | DECIMAL(10,2) | Monto neto (bruto + impuestos).    |
+
+
+### Tabla: `categoria_de_producto`
+
+**Propósito:** Clasificar los productos en diferentes categorías.
+
+| Campo                      | Tipo    | Descripción                          |
+| -------------------------- | ------- | ------------------------------------ |
+| `id_categoria_de_producto` | INT, PK | Identificador único de la categoría. |
+| `categoria_de_producto`    | ENUM    | Categoría del producto.              |
+
+
+### Tabla: `centro_de_almacenamiento`
+
+**Propósito:** Registrar los centros de almacenamiento.
+
+| Campo                         | Tipo         | Descripción                      |
+| ----------------------------- | ------------ | -------------------------------- |
+| `id_centro_de_almacenamiento` | INT, PK      | Identificador único del almacén. |
+| `nombre_almacen`              | ENUM         | Nombre del almacén.              |
+| `ubicacion`                   | VARCHAR(200) | Ubicación del almacén.           |
+| `capacidad`                   | VARCHAR(200) | Capacidad de almacenamiento.     |
+| `responsable`                 | VARCHAR(200) | Responsable del almacén.         |
+
+
+### Tabla: `stock`
+
+**Propósito:** Gestionar la existencia de productos en los almacenes.
+
+| Campo                       | Tipo          | Descripción                               |
+| --------------------------- | ------------- | ----------------------------------------- |
+| `id_stock`                 | INT, PK       | Identificador único del stock.           |
+| `id_producto`              | INT, FK       | Referencia al producto.                  |
+| `id_centro_de_almacenamiento` | INT, FK    | Referencia al centro de almacenamiento.  |
+| `precio`                   | DECIMAL(10,2) | Precio del producto en este stock.       |
+| `cantidad_stock`           | INT           | Cantidad de unidades disponibles.        |
+
+### Tabla: `ventas`
+
+**Propósito:** Registrar las ventas realizadas.
+
+| Campo                   | Tipo          | Descripción                              |
+| ----------------------- | ------------- | ---------------------------------------- |
+| `id_venta`              | INT, PK       | Identificador único de la venta.         |
+| `id_cliente`            | INT, FK       | Cliente que realizó la compra.           |
+| `id_vendedor`           | INT, FK       | Vendedor asociado a la venta.            |
+| `id_categoria_de_producto` | INT, FK    | Categoría de los productos vendidos.     |
+| `id_num_factura_venta`  | INT, FK       | Referencia a la factura de venta.        |
+| `nombre_cliente`        | VARCHAR(200)  | Nombre del cliente.                      |
+| `precio_venta`          | DECIMAL(10,2) | Precio total de los productos vendidos.  |
+| `cantidad`              | INT           | Cantidad total de productos vendidos.    |
+| `total_venta`           | DECIMAL(10,2) | Total de la venta (precio * cantidad).   |
+
+
+### Tabla: `vendedor`
+
+**Propósito:** Gestionar la información de los vendedores.
+
+| Campo                | Tipo         | Descripción                                 |
+| -------------------- | ------------ | ------------------------------------------- |
+| `id_vendedor`        | INT, PK      | Identificador único del vendedor.           |
+| `nombre_vendedor`    | VARCHAR(200) | Nombre del vendedor.                        |
+| `cantidad_de_ventas` | INT          | Cantidad de ventas realizadas.              |
+| `estado_vendedor`    | ENUM         | Estado del vendedor ("ACTIVO", "INACTIVO"). |
+
+### Tabla: `cliente`
+
+**Propósito:** Registrar los clientes de la tienda.
+
+| Campo                 | Tipo         | Descripción                                |
+| --------------------- | ------------ | ------------------------------------------ |
+| `id_cliente`          | INT, PK      | Identificador único del cliente.           |
+| `nombre_cliente`      | VARCHAR(200) | Nombre del cliente.                        |
+| `fecha_de_nacimiento` | DATETIME     | Fecha de nacimiento.                       |
+| `direccion`           | VARCHAR(200) | Dirección del cliente.                     |
+| `email`               | VARCHAR(200) | Correo electrónico (único).                |
+| `fecha_de_alta`       | DATETIME     | Fecha de registro como cliente.            |
+| `estado`              | ENUM         | Estado del cliente ("DEUDOR", "A TIEMPO"). |
+
+### Tabla: `facturas_de_venta`
+
+**Propósito:** Registrar las facturas de venta emitidas.
+
+| Campo                  | Tipo          | Descripción                        |
+| ---------------------- | ------------- | ---------------------------------- |
+| `id_num_factura_venta` | INT, PK       | Identificador único de la factura. |
+| `nombre_cliente`       | VARCHAR(200)  | Nombre del cliente.                |
+| `detalle`              | VARCHAR(200)  | Detalle de la venta.               |
+| `monto_bruto`          | DECIMAL(10,2) | Monto bruto de la factura.         |
+| `impuestos`            | DECIMAL(10,2) | Impuestos aplicados.               |
+| `monto_neto`           | DECIMAL(10,2) | Monto neto (bruto + impuestos).    |
+
+### Tabla: `programas_de_fidelidad`
+| Campo                     | Tipo          | Descripción                              |
+| -----------------------   | ------------- | ---------------------------------------- |
+| `id_programa`             | INT, PK       | Identificador único del programa.        |
+| `id_cliente`              | INT, FK       | Relación con la tabla clientes.          |
+| `puntos_acumulados`       | INT,          | Puntos acumulados por el cliente.         |
+| `nivel_fidelidad`         | ENUM,         | Nivel del cliente (básico, premium, VIP).       |
+
+### Tabla: `promociones`
+
+**Propósito:** Gestionar promociones y descuentos.
+
+| Campo                  | Tipo         | Descripción                          |
+| ---------------------- | ------------ | ------------------------------------ |
+| `id_promocion`         | INT, PK      | Identificador único de la promoción. |
+| `nombre_promocion`     | VARCHAR(255) | Nombre de la promoción.              |
+| `descripcion`          | TEXT         | Descripción de la promoción.         |
+| `fecha_inicio`         | DATETIME     | Fecha de inicio de la promoción.     |
+| `fecha_fin`            | DATETIME     | Fecha de fin de la promoción.        |
+| `porcentaje_descuento` | DECIMAL(5,2) | Porcentaje de descuento aplicado.    |
+
+### Tabla: `metodo_de_envio`
+
+**Propósito:** Registrar los métodos de envío disponibles.
+
+| Campo             | Tipo          | Descripción                              |
+| ----------------- | ------------- | ---------------------------------------- |
+| `id_envio`        | INT, PK       | Identificador único del método de envío. |
+| `nombre_metodo`   | VARCHAR(255)  | Nombre del método de envío.              |
+| `costo_envio`     | DECIMAL(10,2) | Costo del envío.                         |
+| `tiempo_estimado` | VARCHAR(100)  | Tiempo estimado de entrega.              |
+
+
+### Tabla: `detalle_de_venta`
+
+**Propósito:** Detallar los productos vendidos en cada venta.
+
+| Campo                   | Tipo          | Descripción                              |
+| ----------------------- | ------------- | ---------------------------------------- |
+| `id_detalle_de_venta`   | INT, PK       | Identificador único del detalle.         |
+| `id_venta`              | INT, FK       | Referencia a la venta asociada.          |
+| `id_producto`           | INT, FK       | Referencia al producto vendido.          |
+| `id_num_factura_venta`  | INT, FK       | Referencia a la factura de venta.        |
+| `cantidad`              | INT           | Cantidad de unidades vendidas.           |
+| `precio`                | DECIMAL(10,2) | Precio unitario del producto.            |
+| `descuento`             | DECIMAL(10,2) | Descuento aplicado al producto.          |
+| `subtotal`              | DECIMAL(10,2) | Total por producto (cantidad * precio).  |
+| `tipo_venta`            | ENUM          | Tipo de venta ("ONLINE", "FÍSICA").     |
+| `nombre_cliente`        | VARCHAR(200)  | Nombre
+
+### Tabla: `postventa`
+
+**Propósito:** Gestionar los reclamos realizados por los clientes.
+
+| Campo                | Tipo          | Descripción                                |
+| -------------------- | ------------- | ------------------------------------------ |
+| `id_reclamo`         | INT, PK       | Identificador único del reclamo.           |
+| `id_venta`           | INT, FK       | Referencia a la venta asociada.            |
+| `nombre_cliente`     | VARCHAR(200)  | Nombre del cliente.                        |
+| `fecha_reclamo`      | DATETIME      | Fecha en que se realizó el reclamo.        |
+| `tipo_de_reclamo`    | ENUM          | Tipo de reclamo ("PRODUCTO DEFECTUOSO", etc.). |
+| `estado_del_reclamo` | ENUM          | Estado del reclamo ("RESUELTO", "EN PROGRESO", etc.). |
+| `prioridad`          | ENUM          | Prioridad del reclamo ("ALTA", "MEDIA", "BAJA"). |
+| `cantidad_de_reclamos` | INT         | Número de reclamos realizados por el cliente. |
+| `respuesta`          | VARCHAR(200)  | Respuesta proporcionada al cliente.        |
+| `fecha_de_resolucion` | DATETIME     | Fecha en que se resolvió el reclamo.       |
+
+
+
+
