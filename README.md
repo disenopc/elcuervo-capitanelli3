@@ -74,7 +74,7 @@ Organiza y consulta datos relevantes sobre los productos vendidos y los clientes
 
 
 ## **DER - Herramienta utilizada: Excalidraw**
-![alt text](image-1.png)
+![alt text](image.png)
 
 
 ## **DER - Herramienta utilizada: MySQL**
