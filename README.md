@@ -13,7 +13,7 @@
 
 # CONTENIDOS DE LA ENTREGA FINAL
 * Documentación del modelo - El Cuervo PetShop
-* Presentación en Canva
+* Presentación del modelo en Canva
 * Creación de la Base de Datos
 * Características Principales
 * Uso
@@ -21,6 +21,17 @@
 * Estructura del Proyecto
 * Presentación en Canva
 
+
+# ORGANIZACIÓN DEL REPOSITORIO
+
+1. **FOLDER: Entrega Final**
+    **a.backup: por medio de archivo make**
+    **b.objetos: 1-vistas.sql**
+            **   2-funciones.sql**
+            **   3-procedimientos.sql**
+            **   4-triggers.sql**
+            **   5-users.sql**
+            **   6-procedures.tcl**
 
 # **Documentación del modelo - El Cuervo PetShop**
 
@@ -51,7 +62,7 @@ Soporte para analizar el estado de los vendedores (activos o inactivos), su dese
     Control de Productos y Clientes
 Incluye herramientas para organizar y consultar información sobre productos y clientes asociados a las ventas.  
 
-    Filtros Personalizable
+    Filtros Personalizables
 Los procedimientos almacenados permiten realizar consultas específicas según los criterios seleccionados, como tipo de venta, estado del vendedor o rangos de cantidades.  
 
     Integración con MySQL
@@ -62,9 +73,9 @@ Diseñado para aprovechar las capacidades de los procedimientos almacenados, opt
 
     Consultas con Filtros
 El sistema permite realizar consultas avanzadas a través de procedimientos almacenados que admiten filtros como:  
-- Tipo de Venta**: Diferenciando entre ventas presenciales y ventas online.  
-- Estado del Vendedor**: Para identificar si los vendedores están activos o inactivos.  
-- Rangos de Cantidad Vendida**: Permite limitar las consultas a intervalos específicos de cantidades.  
+- **Tipo de Venta**: Diferenciando entre ventas presenciales y ventas online.  
+- **Estado del Vendedor**: Para identificar si los vendedores están activos o inactivos.  
+- **Rangos de Cantidad Vendida**: Permite limitar las consultas a intervalos específicos de cantidades.  
 
     Análisis de Desempeño
 El sistema proporciona herramientas para analizar datos clave sobre los vendedores y su desempeño, incluyendo la cantidad total de ventas realizadas.
