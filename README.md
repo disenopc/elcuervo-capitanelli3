@@ -19,9 +19,6 @@
 * Presentación en Canva
 
 
-
-
-
 # **Documentación del modelo - El Cuervo PetShop**
 
 Este proyecto está diseñado para gestionar las operaciones de ventas, compras y postventa de El Cuervo PetShop. El modelo permite almacenar y organizar información de clientes, proveedores, vendedores, productos, y reclamos postventa. Su estructura facilita la administración del inventario, la auditoría de transacciones, y el seguimiento de interacciones con clientes.
@@ -74,11 +71,11 @@ Organiza y consulta datos relevantes sobre los productos vendidos y los clientes
 
 
 ## **DER - Herramienta utilizada: Excalidraw**
-![alt text](image.png)
+![alt text](DERExcalidraw.png)
 
 
 ## **DER - Herramienta utilizada: MySQL**
-![alt text](image.png)
+![alt text](DERMySQL.png)
 
 
 
