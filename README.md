@@ -612,6 +612,60 @@ Este documento describe los procedimientos almacenados implementados para gestio
 
 ## **TRIGGERS**
 
+## 1. **Trigger: Actualizar la cantidad post venta**
+- **Descripción**: Actualiza la cantidad de ventas registradas para un vendedor inmediatamente después de realizar una venta.
+- **Evento**: `AFTER INSERT` en la tabla `ventas`.
+- **Acción**:
+  - Incrementa el valor de `cantidad_de_ventas` en la tabla `vendedor` correspondiente al `id_vendedor` de la nueva venta.
+- **Relaciones**:
+  - Afecta las tablas `ventas` y `vendedor`.
+
+---
+
+## 2. **Trigger: actualizar el stock post venta**
+- **Descripción**: Gestiona la reducción del stock de productos en inventario tras registrar una venta en el detalle de ventas.
+- **Evento**: `AFTER INSERT` en la tabla `detalle_de_venta`.
+- **Acción**:
+  - Reduce la cantidad de stock del producto correspondiente en la tabla `productos`.
+  - Actualiza la cantidad en la tabla `stock` para reflejar los cambios.
+- **Relaciones**:
+  - Afecta las tablas `detalle_de_venta`, `productos` y `stock`.
+
+---
+
+## 3. **Trigger: actualizar el stock por devolucion**
+- **Descripción**: Maneja reclamos relacionados con las ventas y actualiza el estado del cliente si excede un número predefinido de reclamos.
+- **Evento**: `AFTER INSERT` en la tabla `postventa`.
+- **Acción**:
+  - Obtiene el `id_cliente` de la venta asociada al reclamo.
+  - Verifica la cantidad de reclamos registrados para ese cliente.
+  - Si el cliente tiene más de 3 reclamos, actualiza su estado a `'DEUDOR'` en la tabla `cliente`.
+- **Relaciones**:
+  - Afecta las tablas `postventa`, `ventas` y `cliente`.
+
+---
+
+## Ejemplo de Operaciones Relacionadas
+
+1. **Insertar una nueva venta**:
+   - El trigger `actualizar_cantidad_postventa` incrementará automáticamente el contador de ventas del vendedor involucrado.
+
+2. **Registrar un detalle de venta**:
+   - El trigger `actualizar_stock_postventa` reducirá el stock del producto vendido.
+
+3. **Registrar un reclamo**:
+   - El trigger `actualizar_stock_devolucion` verificará la cantidad de reclamos del cliente asociado y actualizará su estado si corresponde.
+
+---
+
+## Beneficios
+- **Automatización**: Reduce la necesidad de actualizaciones manuales.
+- **Integridad**: Garantiza la consistencia de los datos entre tablas relacionadas.
+- **Eficiencia**: Minimiza el riesgo de errores humanos al realizar actualizaciones complejas.
+
+--- 
+
+**Nota**: Estos triggers están diseñados para un entorno de datos transaccionales y deben usarse con cuidado en bases de datos con alta concurrencia, asegurando que las operaciones estén bien optimizadas para evitar bloqueos.
 ## **USUARIOS**
 
 
