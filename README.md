@@ -722,6 +722,112 @@ Evalúa la rotación de los productos en el inventario comparando las unidades v
 - **Seguridad**: Las contraseñas en este ejemplo son básicas y deben actualizarse según las políticas de seguridad de la organización.
 - **Mantenimiento**: Se recomienda auditar periódicamente los privilegios de los usuarios para garantizar que se alineen con las necesidades actuales del negocio y las mejores prácticas de seguridad.
 
+# Documentación para Usuario "non_root" en El Cuervo Pet Shop
+
+Este documento describe la configuración del usuario **`non_root`**, creado con permisos avanzados pero sin ser directamente el usuario `root`. Este usuario tiene privilegios completos en la base de datos **`elcuervopetshop`** y puede otorgar permisos a otros usuarios, pero opera dentro de un entorno más seguro y controlado.
+
+---
+
+## Detalles del Usuario
+
+### Usuario: `non_root`
+- **Contraseña**: `pass_123!`
+- **Privilegios asignados**:
+  - **Todos los privilegios sobre la base de datos `elcuervopetshop`**:
+    - Permite crear, leer, actualizar, eliminar, y gestionar objetos en esta base de datos.
+  - **Privilegio `SUPER`**:
+    - Permite realizar ciertas operaciones administrativas a nivel de servidor, como monitoreo o manipulación de variables globales.
+  - **`WITH GRANT OPTION`**:
+    - Permite al usuario otorgar permisos a otros usuarios dentro del alcance de sus propios privilegios.
+
+---
+
+## Propósito
+
+El usuario `non_root` está diseñado para:
+1. **Gestión Avanzada**:
+   - Realizar todas las operaciones necesarias para el mantenimiento, desarrollo, y administración de la base de datos `elcuervopetshop`.
+2. **Seguridad Mejorada**:
+   - Limitar el uso del usuario `root` a tareas críticas, promoviendo el uso de un usuario alternativo con permisos similares.
+3. **Delegación de Permisos**:
+   - Facilitar la creación de nuevos usuarios y la asignación de permisos sin depender del usuario `root`.
+
+---
+
+## Procedimientos Realizados
+
+1. **Eliminación del Usuario Existente**:  
+   Si el usuario `non_root` ya existía, se elimina previamente para garantizar una configuración limpia:
+   ```sql
+   DROP USER IF EXISTS 'non_root'@'%';
+   ```
+
+2. **Creación del Usuario**:  
+   Se crea el usuario `non_root` con la contraseña especificada:
+   ```sql
+   CREATE USER 'non_root'@'%' IDENTIFIED BY 'pass_123!';
+   ```
+
+3. **Asignación de Privilegios**:
+   - Privilegios completos sobre la base de datos `elcuervopetshop`:
+     ```sql
+     GRANT ALL PRIVILEGES ON elcuervopetshop.* TO 'non_root'@'%' WITH GRANT OPTION;
+     ```
+   - Permisos adicionales con el privilegio `SUPER`:
+     ```sql
+     GRANT SUPER ON *.* TO 'non_root'@'%' WITH GRANT OPTION;
+     ```
+
+4. **Confirmación de Cambios**:  
+   Los privilegios se aplican inmediatamente con:
+   ```sql
+   FLUSH PRIVILEGES;
+   ```
+
+---
+
+## Consideraciones de Seguridad
+
+- **Uso Controlado del Privilegio `SUPER`**:
+  - Aunque el usuario tiene capacidades administrativas avanzadas, el uso del privilegio `SUPER` debe ser restringido a tareas necesarias, para evitar posibles impactos en el servidor.
+- **Contraseñas Seguras**:
+  - Se recomienda utilizar una contraseña más robusta que cumpla con las políticas de seguridad organizacionales.
+- **Auditorías Periódicas**:
+  - Realizar auditorías regulares de las actividades del usuario `non_root` para asegurar que se estén cumpliendo las políticas de uso adecuado.
+
+---
+
+## Resumen de Comandos
+
+```sql
+DROP DATABASE IF EXISTS elcuervopetshop;
+CREATE DATABASE IF NOT EXISTS elcuervopetshop;
+
+DROP USER IF EXISTS 'non_root'@'%';
+CREATE USER 'non_root'@'%' IDENTIFIED BY 'pass_123!';
+GRANT ALL PRIVILEGES ON elcuervopetshop.* TO 'non_root'@'%' WITH GRANT OPTION;
+GRANT SUPER ON *.* TO 'non_root'@'%' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+```
+
+---
+
+## Verificación de Configuración
+
+Para confirmar la creación del usuario y sus privilegios:
+1. Consultar la lista de usuarios y privilegios en el servidor MySQL:
+   ```sql
+   SELECT user, host FROM mysql.user;
+   ```
+2. Revisar los privilegios específicos asignados al usuario `non_root`:
+   ```sql
+   SHOW GRANTS FOR 'non_root'@'%';
+   ```
+
+---
+
+Este usuario proporciona una alternativa segura y funcional para administrar la base de datos y delegar permisos, manteniendo al usuario `root` reservado para situaciones críticas.
+
 ### Como levantar el proyecto en CodeSpaces GitHub
             env: Archivo con contraseñas y data secretas
             Makefile: Abstracción de creacción del proyecto
