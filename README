@@ -17,14 +17,14 @@ USE elcuervopetshop;
 
 **Propósito:** Registrar información sobre los proveedores.
 
-| Campo                   | Tipo          | Descripción                                |
-| ----------------------- | ------------- | ------------------------------------------ |
-| `id_proveedor`          | INT, PK       | Identificador único del proveedor.         |
-| `id_producto`           | INT, FK       | Producto suministrado por el proveedor.    |
-| `id_categoria_de_producto` | INT, FK    | Categoría del producto.                    |
-| `fecha`                 | DATETIME      | Fecha del registro o última actualización. |
-| `numero_de_pedido`      | INT           | Número de pedido asociado.                 |
-| `detalles`              | VARCHAR(200)  | Detalles del pedido o relación.            |
+| Campo                   | Tipo          | Descripción                                           |
+| ----------------------- | ------------- | ------------------------------------------            |
+| `id_proveedor`          | INT, PK       | Identificador único del proveedor.                    |
+| `id_producto`           | INT, FK       | Producto suministrado por el proveedor.               |
+| `id_categoria_de_producto` | INT, FK    | Categoría del producto.                               |
+| `fecha`                 | DATETIME      | Fecha del registro o última actualización.            |    
+| `numero_de_pedido`      | INT           | Número de pedido asociado.                            |
+| `detalles`              | VARCHAR(200)  | Detalles del pedido o relación.                       |
 | `forma_de_pago`         | ENUM          | Forma de pago pactada ("CONTADO", "A 30 DÍAS", etc.). |
 | `estado_del_pago`       | ENUM          | Estado del pago ("PAGADO", "PENDIENTE"). |
 
@@ -63,8 +63,8 @@ USE elcuervopetshop;
 | ------------------ | ------------- | --------------------------------------- |
 | `id_historial_precio` | INT, PK    | Identificador único del registro.       |
 | `id_producto`        | INT, FK     | Referencia al producto.                 |
-| `precio_anterior`    | DECIMAL(10,2) | Precio anterior del producto.          |
-| `precio_nuevo`       | DECIMAL(10,2) | Nuevo precio del producto.             |
+| `precio_anterior`    | DECIMAL(10,2) | Precio anterior del producto.         |
+| `precio_nuevo`       | DECIMAL(10,2) | Nuevo precio del producto.            |
 | `fecha_cambio`       | DATETIME    | Fecha en que se realizó el cambio.      |
 
 
@@ -111,8 +111,8 @@ USE elcuervopetshop;
 
 **Propósito:** Gestionar la existencia de productos en los almacenes.
 
-| Campo                       | Tipo          | Descripción                               |
-| --------------------------- | ------------- | ----------------------------------------- |
+| Campo                      | Tipo          | Descripción                             |
+| ---------------------------| ------------- | --------------------------------------- |
 | `id_stock`                 | INT, PK       | Identificador único del stock.           |
 | `id_producto`              | INT, FK       | Referencia al producto.                  |
 | `id_centro_de_almacenamiento` | INT, FK    | Referencia al centro de almacenamiento.  |
@@ -179,8 +179,8 @@ USE elcuervopetshop;
 | -----------------------   | ------------- | ---------------------------------------- |
 | `id_programa`             | INT, PK       | Identificador único del programa.        |
 | `id_cliente`              | INT, FK       | Relación con la tabla clientes.          |
-| `puntos_acumulados`       | INT,          | Puntos acumulados por el cliente.         |
-| `nivel_fidelidad`         | ENUM,         | Nivel del cliente (básico, premium, VIP).       |
+| `puntos_acumulados`       | INT,          | Puntos acumulados por el cliente.        |
+| `nivel_fidelidad`         | ENUM,         | Nivel del cliente (básico, premium, VIP).|
 
 ### Tabla: `promociones`
 
@@ -221,25 +221,25 @@ USE elcuervopetshop;
 | `precio`                | DECIMAL(10,2) | Precio unitario del producto.            |
 | `descuento`             | DECIMAL(10,2) | Descuento aplicado al producto.          |
 | `subtotal`              | DECIMAL(10,2) | Total por producto (cantidad * precio).  |
-| `tipo_venta`            | ENUM          | Tipo de venta ("ONLINE", "FÍSICA").     |
+| `tipo_venta`            | ENUM          | Tipo de venta ("ONLINE", "FÍSICA").      |
 | `nombre_cliente`        | VARCHAR(200)  | Nombre
 
 ### Tabla: `postventa`
 
 **Propósito:** Gestionar los reclamos realizados por los clientes.
 
-| Campo                | Tipo          | Descripción                                |
-| -------------------- | ------------- | ------------------------------------------ |
-| `id_reclamo`         | INT, PK       | Identificador único del reclamo.           |
-| `id_venta`           | INT, FK       | Referencia a la venta asociada.            |
-| `nombre_cliente`     | VARCHAR(200)  | Nombre del cliente.                        |
-| `fecha_reclamo`      | DATETIME      | Fecha en que se realizó el reclamo.        |
-| `tipo_de_reclamo`    | ENUM          | Tipo de reclamo ("PRODUCTO DEFECTUOSO", etc.). |
-| `estado_del_reclamo` | ENUM          | Estado del reclamo ("RESUELTO", "EN PROGRESO", etc.). |
-| `prioridad`          | ENUM          | Prioridad del reclamo ("ALTA", "MEDIA", "BAJA"). |
-| `cantidad_de_reclamos` | INT         | Número de reclamos realizados por el cliente. |
-| `respuesta`          | VARCHAR(200)  | Respuesta proporcionada al cliente.        |
-| `fecha_de_resolucion` | DATETIME     | Fecha en que se resolvió el reclamo.       |
+| Campo                | Tipo          | Descripción                                            |
+| -------------------- | ------------- | ------------------------------------------             |
+| `id_reclamo`         | INT, PK       | Identificador único del reclamo.                       |
+| `id_venta`           | INT, FK       | Referencia a la venta asociada.                        |
+| `nombre_cliente`     | VARCHAR(200)  | Nombre del cliente.                                    |
+| `fecha_reclamo`      | DATETIME      | Fecha en que se realizó el reclamo.                    |
+| `tipo_de_reclamo`    | ENUM          | Tipo de reclamo ("PRODUCTO DEFECTUOSO", etc.).         |
+| `estado_del_reclamo` | ENUM          | Estado del reclamo ("RESUELTO", "EN PROGRESO", etc.).  |
+| `prioridad`          | ENUM          | Prioridad del reclamo ("ALTA", "MEDIA", "BAJA").       |
+| `cantidad_de_reclamos` | INT         | Número de reclamos realizados por el cliente.          |
+| `respuesta`          | VARCHAR(200)  | Respuesta proporcionada al cliente.                    |
+| `fecha_de_resolucion` | DATETIME     | Fecha en que se resolvió el reclamo.                   |
 
 
 
