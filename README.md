@@ -654,8 +654,73 @@ Evalúa la rotación de los productos en el inventario comparando las unidades v
 --- 
 
 **Nota**: Estos triggers están diseñados para un entorno de datos transaccionales y deben usarse con cuidado en bases de datos con alta concurrencia, asegurando que las operaciones estén bien optimizadas para evitar bloqueos.
+
 ## **USUARIOS**
 
+### 1. **Usuario: `usuario_uri`**
+- **Descripción**: Usuario destinado al área de compras.
+- **Contraseña**: `pass_123!`
+- **Privilegios**:
+  - Tiene permisos de solo lectura (`SELECT`) sobre:
+    - `vista_rotacion_inventarios`: Información de rotación de inventarios.
+    - `vista_mensual_crecimiento_ventas`: Estadísticas sobre el crecimiento mensual de las ventas.
+- **Propósito**: Permite al área de compras analizar datos clave sobre el movimiento del inventario y el comportamiento de las ventas para la planificación de adquisiciones.
+
+---
+
+### 2. **Usuario: `usuario_gero`**
+- **Descripción**: Usuario destinado al área de ventas.
+- **Contraseña**: `pass_123!`
+- **Privilegios**:
+  - Tiene permisos de solo lectura (`SELECT`) sobre todas las tablas y vistas de la base de datos (`elcuervopetshop.*`).
+- **Propósito**: Habilita al área de ventas para consultar información de productos, clientes, ventas, y reportes necesarios para la operación diaria y toma de decisiones.
+
+---
+
+### 3. **Usuario: `usuario_dani`**
+- **Descripción**: Usuario destinado al área de postventa.
+- **Contraseña**: `pass_123!`
+- **Privilegios**:
+  - Tiene todos los privilegios (`ALL PRIVILEGES`) sobre la base de datos `elcuervopetshop`.
+- **Propósito**: Facilita al área de postventa la gestión completa de reclamos, actualizaciones de datos relacionados y generación de reportes personalizados.
+
+---
+
+## Resumen de Privilegios
+
+| Usuario         | Contraseña   | Áreas de Acceso                     | Privilegios      | Propósito                                |
+|-----------------|--------------|--------------------------------------|------------------|------------------------------------------|
+| `usuario_uri`   | `pass_123!`  | Vista de inventarios y crecimiento  | `SELECT`         | Análisis de inventarios y ventas         |
+| `usuario_gero`  | `pass_123!`  | Toda la base de datos               | `SELECT`         | Consulta general para el área de ventas  |
+| `usuario_dani`  | `pass_123!`  | Toda la base de datos               | `ALL PRIVILEGES` | Gestión y análisis para postventa        |
+
+---
+
+## Configuración Adicional
+- **Eliminación previa de usuarios existentes**:
+  - Antes de crear los usuarios, se eliminan versiones previas de estos mediante el comando:
+    ```sql
+    DROP USER IF EXISTS 
+    'usuario_uri'@'%', 
+    'usuario_gero'@'%', 
+    'usuario_dani'@'%';
+    ```
+- **Actualización de privilegios**:
+  - Los cambios en los privilegios se confirman con:
+    ```sql
+    FLUSH PRIVILEGES;
+    ```
+- **Consulta de usuarios existentes**:
+  - Se puede verificar la creación y configuración de los usuarios con:
+    ```sql
+    SELECT * FROM mysql.user;
+    ```
+
+---
+
+## Notas
+- **Seguridad**: Las contraseñas en este ejemplo son básicas y deben actualizarse según las políticas de seguridad de la organización.
+- **Mantenimiento**: Se recomienda auditar periódicamente los privilegios de los usuarios para garantizar que se alineen con las necesidades actuales del negocio y las mejores prácticas de seguridad.
 
 ### Como levantar el proyecto en CodeSpaces GitHub
             env: Archivo con contraseñas y data secretas
@@ -669,4 +734,3 @@ Evalúa la rotación de los productos en el inventario comparando las unidades v
             make backup-db para realizar un backup de mi base de datos
             make access-db para acceder a la base de datos
 
-[def]: image.png
