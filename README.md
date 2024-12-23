@@ -18,8 +18,17 @@
 * Características Principales
 * Uso
 * DER - Herramienta utilizada: Excalidraw
+* DER - Herramienta utilizada: MySQL
 * Estructura del Proyecto
-* Presentación en Canva
+* Tablas
+* Vistas
+* Funciones
+* Procedimientos
+* Triggers
+* Usuarios
+* Cómo levantar el proyecto en CodeSpaces GitHub
+* Pasos para arrancar el proyecto
+
 
 
 # ORGANIZACIÓN DEL REPOSITORIO
