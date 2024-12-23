@@ -32,7 +32,7 @@
       - **3. procedimientos.sql**  
       - **4. triggers.sql**  
       - **5. users.sql**  
-      - **6. procedures.tcl**
+      - **6. procedures.tcl**  
     **c. estructura**  
     **d. population**  
     **e. non-root**
