@@ -77,6 +77,10 @@ Organiza y consulta datos relevantes sobre los productos vendidos y los clientes
 ![alt text](image-1.png)
 
 
+## **DER - Herramienta utilizada: MySQL**
+![alt text](image.png)
+
+
 
 ## **Estructura del Proyecto**
 

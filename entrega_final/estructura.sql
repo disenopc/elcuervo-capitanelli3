@@ -62,16 +62,6 @@ capacidad VARCHAR(200),
 responsable VARCHAR(200)
 );
 
--- TABLA PROMOCIONES
-CREATE TABLE promociones (
-    id_promocion INT AUTO_INCREMENT PRIMARY KEY,
-    nombre_promocion VARCHAR(255) NOT NULL,
-    descripcion TEXT,
-    fecha_inicio DATETIME NOT NULL,
-    fecha_fin DATETIME NOT NULL,
-    porcentaje_descuento DECIMAL(5, 2) NOT NULL
-);
-
 -- TABLA METODO DE ENVIO
 CREATE TABLE metodo_de_envio (
     id_envio INT PRIMARY KEY AUTO_INCREMENT,
@@ -79,6 +69,7 @@ CREATE TABLE metodo_de_envio (
     costo_envio DECIMAL(10, 2) NOT NULL,
     tiempo_estimado VARCHAR(100) NOT NULL
 );
+
 
 
 -- TABLAS CON FK
@@ -95,6 +86,17 @@ FOREIGN KEY (id_numero_de_factura_de_compra) REFERENCES facturas_de_compra(id_nu
 FOREIGN KEY (id_categoria_de_producto) REFERENCES categoria_de_producto(id_categoria_de_producto)
 );
 
+-- TABLA PROMOCIONES
+CREATE TABLE promociones (
+    id_promocion INT AUTO_INCREMENT PRIMARY KEY,
+    id_producto INT,
+    nombre_promocion VARCHAR(255) NOT NULL,
+    descripcion TEXT,
+    fecha_inicio DATETIME NOT NULL,
+    fecha_fin DATETIME NOT NULL,
+    porcentaje_descuento DECIMAL(5, 2) NOT NULL,
+    FOREIGN KEY (id_producto) REFERENCES productos(id_producto)
+);
 
 -- TABLA HISTORIAL DE PRECIOS
 CREATE TABLE historial_de_precios (
@@ -143,13 +145,17 @@ FOREIGN KEY (id_producto) REFERENCES productos(id_producto),
 FOREIGN KEY (id_centro_de_almacenamiento) REFERENCES centro_de_almacenamiento(id_centro_de_almacenamiento)
 );
 
+
+
 -- TABLA VENTAS
 CREATE TABLE ventas(
 id_venta INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 id_cliente INT,
 id_vendedor INT,
 id_categoria_de_producto INT,
+id_promocion INT,
 id_num_factura_venta INT,
+id_envio INT,
 nombre_cliente VARCHAR(200),
 precio_venta DECIMAL(10,2),
 cantidad INT,
@@ -157,7 +163,9 @@ total_venta DECIMAL(10,2),
 FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente),
 FOREIGN KEY (id_categoria_de_producto) REFERENCES categoria_de_producto(id_categoria_de_producto),
 FOREIGN KEY (id_vendedor) REFERENCES vendedor(id_vendedor),
-FOREIGN KEY (id_num_factura_venta) REFERENCES facturas_de_venta(id_num_factura_venta)
+FOREIGN KEY (id_num_factura_venta) REFERENCES facturas_de_venta(id_num_factura_venta),
+FOREIGN KEY (id_promocion) REFERENCES promociones(id_promocion),
+FOREIGN KEY (id_envio) REFERENCES metodo_de_envio(id_envio)
 );
 
 -- TABLA RECLAMOS
@@ -200,3 +208,5 @@ CREATE TABLE programas_de_fidelidad (
     nivel_fidelidad ENUM ("ALTO","MEDIO","BAJO"),
     FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente)
 );
+
+
