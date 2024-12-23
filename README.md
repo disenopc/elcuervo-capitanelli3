@@ -494,7 +494,7 @@ Evalúa la rotación de los productos en el inventario comparando las unidades v
 
 ## **FUNCIONES**
 
-## 1.**Función: Verificar Disponibilidad de un Producto**
+## 1. **Función: Verificar Disponibilidad de un Producto**
 - **Descripción**: La función `verificar_disponibilidad_producto` se utiliza para comprobar si un producto tiene suficiente stock disponible para satisfacer una cantidad deseada.
 - **Relación en el DER**:
   - Tabla **stock**: La función consulta el atributo `cantidad_stock` usando `id_producto` como clave de búsqueda.
@@ -502,7 +502,7 @@ Evalúa la rotación de los productos en el inventario comparando las unidades v
 
 ---
 
-## 2.**Función: Tiempo Promedio de Resolución de Reclamos**
+## 2. **Función: Tiempo Promedio de Resolución de Reclamos**
 - **Descripción**: La función `tiempo_promedio_resolucion_reclamos` calcula el tiempo promedio (en días) que tarda en resolverse un reclamo marcado como "RESUELTO".
 - **Relación en el DER**:
   - Tabla **postventa**: Utiliza los atributos `fecha_de_resolucion`, `fecha_reclamo` y `estado_del_reclamo` para calcular la diferencia de días.
@@ -510,7 +510,7 @@ Evalúa la rotación de los productos en el inventario comparando las unidades v
 
 ---
 
-## 3.**Función: Tasa de Retención del Cliente**
+## 3. **Función: Tasa de Retención del Cliente**
 - **Descripción**: La función `calcular_tasa_retencion_clientes` calcula el porcentaje de clientes activos (con al menos una venta) en relación con el total de clientes registrados.
 - **Relación en el DER**:
   - Tabla **cliente**: Se consulta el número total de clientes (`id_cliente`).
@@ -519,7 +519,7 @@ Evalúa la rotación de los productos en el inventario comparando las unidades v
 
 ---
 
-#### 4.**Función: Vendedor con Mayor Cantidad de Ventas**
+## 4. **Función: Vendedor con Mayor Cantidad de Ventas**
 - **Descripción**: La función `vendedor_top_ventas` obtiene el nombre del vendedor con la mayor cantidad de ventas ejecutadas.
 - **Relación en el DER**:
   - Tabla **vendedor**: Se consulta el atributo `cantidad_de_ventas` y se ordenan los registros para obtener al vendedor con más ventas.
