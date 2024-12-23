@@ -528,59 +528,87 @@ Evalúa la rotación de los productos en el inventario comparando las unidades v
 ---
 
 ## **PROCEDIMIENTOS**
-1. InsertarProducto
-Descripción: Permite registrar un nuevo producto en la base de datos.
-Parámetros de entrada:
-p_id_factura_compra: Identificador de la factura de compra asociada.
-p_id_categoria: Identificador de la categoría del producto.
-p_nombre_producto: Nombre del producto.
-p_precio: Precio del producto.
-p_cantidad: Cantidad inicial de stock del producto.
-Relaciones:
-Inserta datos en la tabla productos.
-Se relaciona con facturas_de_compra y categoria_de_producto mediante claves foráneas.
-2. RegistrarVenta
-Descripción: Registra una nueva venta y genera la factura correspondiente.
-Parámetros de entrada:
-p_id_cliente: Identificador del cliente.
-p_id_vendedor: Identificador del vendedor.
-p_id_categoria: Identificador de la categoría del producto.
-p_nombre_cliente: Nombre del cliente.
-p_precio_venta: Precio unitario del producto vendido.
-p_cantidad: Cantidad vendida.
-Relaciones:
-Inserta datos en las tablas facturas_de_venta y ventas.
-Relaciona ventas con cliente, vendedor y categoria_de_producto mediante claves foráneas.
-3. RegistrarReclamo
-Descripción: Registra un nuevo reclamo en el sistema postventa.
-Parámetros de entrada:
-p_id_venta: Identificador de la venta asociada al reclamo.
-p_nombre_cliente: Nombre del cliente.
-p_tipo_reclamo: Tipo de reclamo (enum: PRODUCTO DEFECTUOSO, RETRASO EN ENTREGA, etc.).
-p_prioridad: Prioridad del reclamo (enum: ALTA, MEDIA, BAJA).
-p_respuesta: Respuesta inicial al reclamo.
-Relaciones:
-Inserta datos en la tabla postventa.
-Relaciona postventa con ventas.
-4. ActualizarStock
-Descripción: Actualiza el stock de un producto en el almacén correspondiente.
-Parámetros de entrada:
-p_id_producto: Identificador del producto.
-p_id_centro_almacenamiento: Identificador del centro de almacenamiento.
-p_cantidad: Cantidad a añadir al stock.
-Relaciones:
-Actualiza o inserta datos en la tabla stock.
-Sincroniza el stock de la tabla productos.
-5. ObtenerDetallesVentaConVendedoresFiltrados
-Descripción: Recupera detalles de ventas con filtros avanzados sobre el tipo de venta, estado del vendedor y rangos de cantidad.
-Parámetros de entrada:
-p_tipo_venta: Tipo de venta a filtrar (opcional).
-p_estado_vendedor: Estado del vendedor a filtrar (opcional).
-p_min_cantidad: Cantidad mínima de productos vendidos (por defecto: 0).
-p_max_cantidad: Cantidad máxima de productos vendidos (por defecto: 1,000,000).
-Relaciones:
-Consulta las tablas detalle_de_venta, ventas, y vendedor.
-Permite análisis con múltiples criterios.
+Aquí tienes el formato en **README**:
+
+---
+
+# Procedimientos Almacenados - El Cuervo Pet Shop
+
+## Descripción General
+Este documento describe los procedimientos almacenados implementados para gestionar diversas operaciones en el sistema de base de datos de **El Cuervo Pet Shop**, como el registro de productos, ventas, reclamos, y actualización de stock. Además, incluye un procedimiento para filtrar detalles de ventas.
+
+---
+
+## Procedimientos
+
+## 1. **Procedimiento: Insertar un nuevo producto**
+- **Descripción**: Permite registrar un nuevo producto en la base de datos.
+- **Parámetros de entrada**:
+  - `p_id_factura_compra`: Identificador de la factura de compra asociada.
+  - `p_id_categoria`: Identificador de la categoría del producto.
+  - `p_nombre_producto`: Nombre del producto.
+  - `p_precio`: Precio del producto.
+  - `p_cantidad`: Cantidad inicial de stock del producto.
+- **Relaciones**:
+  - Inserta datos en la tabla `productos`.
+  - Se relaciona con las tablas `facturas_de_compra` y `categoria_de_producto` mediante claves foráneas.
+
+---
+
+## 2. **Procedimiento: Registrar una venta**
+- **Descripción**: Registra una nueva venta y genera la factura correspondiente.
+- **Parámetros de entrada**:
+  - `p_id_cliente`: Identificador del cliente.
+  - `p_id_vendedor`: Identificador del vendedor.
+  - `p_id_categoria`: Identificador de la categoría del producto.
+  - `p_nombre_cliente`: Nombre del cliente.
+  - `p_precio_venta`: Precio unitario del producto vendido.
+  - `p_cantidad`: Cantidad vendida.
+- **Relaciones**:
+  - Inserta datos en las tablas `facturas_de_venta` y `ventas`.
+  - Relaciona la tabla `ventas` con las tablas `cliente`, `vendedor`, y `categoria_de_producto` mediante claves foráneas.
+
+---
+
+## 3. **Procedimiento: Registrar un reclamo**
+- **Descripción**: Registra un nuevo reclamo en el sistema postventa.
+- **Parámetros de entrada**:
+  - `p_id_venta`: Identificador de la venta asociada al reclamo.
+  - `p_nombre_cliente`: Nombre del cliente.
+  - `p_tipo_reclamo`: Tipo de reclamo (enum: `PRODUCTO DEFECTUOSO`, `RETRASO EN ENTREGA`, etc.).
+  - `p_prioridad`: Prioridad del reclamo (enum: `ALTA`, `MEDIA`, `BAJA`).
+  - `p_respuesta`: Respuesta inicial al reclamo.
+- **Relaciones**:
+  - Inserta datos en la tabla `postventa`.
+  - Relaciona la tabla `postventa` con la tabla `ventas`.
+
+---
+
+## 4. **Procedimiento: Actualizar el stock**
+- **Descripción**: Actualiza el stock de un producto en el almacén correspondiente.
+- **Parámetros de entrada**:
+  - `p_id_producto`: Identificador del producto.
+  - `p_id_centro_almacenamiento`: Identificador del centro de almacenamiento.
+  - `p_cantidad`: Cantidad a añadir al stock.
+- **Relaciones**:
+  - Actualiza o inserta datos en la tabla `stock`.
+  - Sincroniza el stock de la tabla `productos`.
+
+---
+
+## 5. **Procedimiento: Obtener detalles de venta con vendedores filtrados**
+- **Descripción**: Recupera detalles de ventas con filtros avanzados sobre el tipo de venta, estado del vendedor y rangos de cantidad.
+- **Parámetros de entrada**:
+  - `p_tipo_venta`: Tipo de venta a filtrar (opcional).
+  - `p_estado_vendedor`: Estado del vendedor a filtrar (opcional).
+  - `p_min_cantidad`: Cantidad mínima de productos vendidos (por defecto: 0).
+  - `p_max_cantidad`: Cantidad máxima de productos vendidos (por defecto: 1,000,000).
+- **Relaciones**:
+  - Consulta las tablas `detalle_de_venta`, `ventas`, y `vendedor`.
+  - Permite análisis con múltiples criterios.
+
+---
+
 
 ## **TRIGGERS**
 
