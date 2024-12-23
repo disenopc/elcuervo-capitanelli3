@@ -19,7 +19,7 @@
 * Uso
 * DER - Herramienta utilizada: Excalidraw
 * DER - Herramienta utilizada: MySQL
-* Estructura del Proyecto
+* Estructura del Proyecto e ingesta de datos
 * Tablas
 * Vistas
 * Funciones
@@ -28,6 +28,7 @@
 * Usuarios
 * Cómo levantar el proyecto en CodeSpaces GitHub
 * Pasos para arrancar el proyecto
+* Backup archivo make
 
 
 
@@ -388,6 +389,10 @@ Problema que Resuelve: Facilita el seguimiento y la gestión de los reclamos par
 | `respuesta`          | VARCHAR(200)  | Respuesta proporcionada al cliente.                    |
 | `fecha_de_resolucion` | DATETIME     | Fecha en que se resolvió el reclamo.                   |
 
+
+## LA INGESTA DE DATOS
+
+Se llevó a cabo a través de un archivo llamado population.sql con registros generados por Claude.ai. 
 
 ## **VISTAS**
 
@@ -866,5 +871,11 @@ Este usuario proporciona una alternativa segura y funcional para administrar la 
             make test-db para mirar los datos de cada tabla
             make backup-db para realizar un backup de mi base de datos
             make access-db para acceder a la base de datos
+
+
+
+### Backup del archivo make
+El procedimiento de respaldo (`backup-db`) realiza una copia completa de la base de datos, incluyendo estructura, datos, rutinas, triggers y eventos, y la guarda en un archivo en el directorio especificado (`BACKUP_DIR_FILES`). 
+También concatena los objetos adicionales definidos en la carpeta `$(OBJECTS_DIR)` al archivo de respaldo. Finalmente, genera un archivo con formato `$(DATABASE)-$(CURDATE).sql` dentro de `entrega_final`.
 
 ![alt text](./Img/brand2.png)
