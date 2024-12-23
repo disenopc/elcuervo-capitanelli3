@@ -13,7 +13,7 @@ CREATE DATABASE elcuervopetshop;
 USE elcuervopetshop;
 ```
 
-### Características Principales
+## Características Principales
 
     Gestión de Ventas
 Permite consultar y analizar las ventas realizadas con diversos filtros, como el tipo de venta (online o presencial) y rangos de cantidades vendidas.  
@@ -31,7 +31,7 @@ Los procedimientos almacenados permiten realizar consultas específicas según l
 Diseñado para aprovechar las capacidades de los procedimientos almacenados, optimizando el acceso a la información y reduciendo la carga en las aplicaciones externas.
 
 
-### Uso
+## Uso
 
     Consultas con Filtros
 El sistema permite realizar consultas avanzadas a través de procedimientos almacenados que admiten filtros como:  
@@ -46,13 +46,12 @@ El sistema proporciona herramientas para analizar datos clave sobre los vendedor
 Organiza y consulta datos relevantes sobre los productos vendidos y los clientes asociados, proporcionando una visión integral de las operaciones.
 
 
-### DER - Herramienta utilizada: Excalidraw
-
-![alt text](image.png)
-
+## DER - Herramienta utilizada: Excalidraw
+![alt text](image-1.png)
 
 
-### Estructura del Proyecto
+
+## Estructura del Proyecto
 
 El proyecto está organizado de la siguiente manera:  
 
@@ -345,3 +344,5 @@ Problema que Resuelve: Facilita el seguimiento y la gestión de los reclamos par
             make test-db para mirar los datos de cada tabla
             make backup-db para realizar un backup de mi base de datos
             make access-db para acceder a la base de datos
+
+[def]: image.png
