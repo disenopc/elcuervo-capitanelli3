@@ -840,3 +840,4 @@ Este usuario proporciona una alternativa segura y funcional para administrar la 
             make backup-db para realizar un backup de mi base de datos
             make access-db para acceder a la base de datos
 
+![alt text](./Img/brand2.png)
