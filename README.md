@@ -494,7 +494,7 @@ Evalúa la rotación de los productos en el inventario comparando las unidades v
 
 ## **FUNCIONES**
 
-#### **PRIMERA FUNCIÓN: Verificar Disponibilidad de un Producto**
+## 1.**PRIMERA FUNCIÓN: Verificar Disponibilidad de un Producto**
 - **Descripción**: La función `verificar_disponibilidad_producto` se utiliza para comprobar si un producto tiene suficiente stock disponible para satisfacer una cantidad deseada.
 - **Relación en el DER**:
   - Tabla **stock**: La función consulta el atributo `cantidad_stock` usando `id_producto` como clave de búsqueda.
