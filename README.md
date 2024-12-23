@@ -1,3 +1,13 @@
+# PROYECTO: EL CUERVO PETSHOP
+
+Alumno: Patricia Laura Capitanelli
+Curso: SQL
+Comisión: 59430
+Docente: Anderson Michel Torres
+Tutor: Hugo González
+
+
+
 CONTENIDOS DE LA ENTREGA FINAL
 # Documentación del modelo - El Cuervo PetShop
 # Presentación en Canva
