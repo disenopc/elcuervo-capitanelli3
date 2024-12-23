@@ -87,16 +87,16 @@ Diseñado para aprovechar las capacidades de los procedimientos almacenados, opt
 
 ## **Uso**
 
-    **Consultas con Filtros**
+### Consultas con Filtros
 El sistema permite realizar consultas avanzadas a través de procedimientos almacenados que admiten filtros como:  
 - **Tipo de Venta**: Diferenciando entre ventas presenciales y ventas online.  
 - **Estado del Vendedor**: Para identificar si los vendedores están activos o inactivos.  
 - **Rangos de Cantidad Vendida**: Permite limitar las consultas a intervalos específicos de cantidades.  
 
-    **Análisis de Desempeño**
+### Análisis de Desempeño
 El sistema proporciona herramientas para analizar datos clave sobre los vendedores y su desempeño, incluyendo la cantidad total de ventas realizadas.
 
-    **Control de Productos y Clientes**
+### Control de Productos y Clientes
 Organiza y consulta datos relevantes sobre los productos vendidos y los clientes asociados, proporcionando una visión integral de las operaciones.
 
 
