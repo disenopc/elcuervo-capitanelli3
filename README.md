@@ -1,3 +1,6 @@
+![alt text](/Img/brand.png)
+
+
 # PROYECTO: EL CUERVO PETSHOP
 
 * Alumno: Patricia Laura Capitanelli,
